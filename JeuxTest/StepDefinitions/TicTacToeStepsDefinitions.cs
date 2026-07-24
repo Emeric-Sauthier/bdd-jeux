@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using JeuxLibrairy.Common.Enums;
 using JeuxLibrairy.Common.Exceptions;
 using JeuxLibrairy.TicTacToe;
 using JeuxLibrairy.TicTacToe.Exceptions;
-using JeuxLibrairy.Common.Enums;
 
 namespace JeuxTest.StepDefinitions
 {
