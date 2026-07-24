@@ -3,7 +3,7 @@
 TicTacToe testing scenarios
 
 Background: 
-	Given start game
+	Given start tic tac toe game
 
 # ------------- Cas nominaux ------------ #
 Scenario: Alternate plays

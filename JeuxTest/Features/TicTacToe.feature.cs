@@ -120,7 +120,7 @@ namespace JeuxTest.Features
 #line 5
 #line hidden
 #line 6
- await testRunner.GivenAsync("start game", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
+ await testRunner.GivenAsync("start tic tac toe game", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
 #line hidden
         }
         
