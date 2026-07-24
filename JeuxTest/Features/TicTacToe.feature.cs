@@ -126,7 +126,7 @@ namespace JeuxTest.Features
         
         private static global::Reqnroll.Formatters.RuntimeSupport.FeatureLevelCucumberMessages InitializeCucumberMessages()
         {
-            return new global::Reqnroll.Formatters.RuntimeSupport.FeatureLevelCucumberMessages("Features/TicTacToe.feature.ndjson", 12);
+            return new global::Reqnroll.Formatters.RuntimeSupport.FeatureLevelCucumberMessages("Features/TicTacToe.feature.ndjson", 13);
         }
         
         [global::Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute("Alternate plays")]
@@ -261,15 +261,15 @@ await this.FeatureBackgroundAsync();
             await this.ScenarioCleanupAsync();
         }
         
-        [global::Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute("Player2 wins on a diagonal")]
-        [global::Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Player2 wins on a diagonal")]
+        [global::Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute("Player2 wins on a diagonal (left to right)")]
+        [global::Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Player2 wins on a diagonal (left to right)")]
         [global::Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "TicTacToe")]
-        public async global::System.Threading.Tasks.Task Player2WinsOnADiagonal()
+        public async global::System.Threading.Tasks.Task Player2WinsOnADiagonalLeftToRight()
         {
             string[] tagsOfScenario = ((string[])(null));
             global::System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new global::System.Collections.Specialized.OrderedDictionary();
             string pickleIndex = "3";
-            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Player2 wins on a diagonal", null, tagsOfScenario, argumentsOfScenario, featureTags, pickleIndex);
+            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Player2 wins on a diagonal (left to right)", null, tagsOfScenario, argumentsOfScenario, featureTags, pickleIndex);
             string[] tagsOfRule = ((string[])(null));
             global::Reqnroll.RuleInfo ruleInfo = null;
 #line 31
@@ -286,21 +286,73 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
 await this.FeatureBackgroundAsync();
 #line hidden
 #line 32
- await testRunner.WhenAsync("player2 puts \'O\' at (0,0)", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
+ await testRunner.WhenAsync("player1 puts \'X\' at (1,2)", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
 #line 33
- await testRunner.AndAsync("player1 puts \'X\' at (1,0)", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+ await testRunner.AndAsync("player2 puts \'O\' at (0,0)", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
 #line 34
- await testRunner.AndAsync("player2 puts \'O\' at (1,1)", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+ await testRunner.AndAsync("player1 puts \'X\' at (1,0)", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
 #line 35
- await testRunner.AndAsync("player1 puts \'X\' at (2,0)", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+ await testRunner.AndAsync("player2 puts \'O\' at (1,1)", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
 #line 36
- await testRunner.AndAsync("player2 puts \'O\' at (2,2)", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+ await testRunner.AndAsync("player1 puts \'X\' at (2,0)", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
 #line 37
+ await testRunner.AndAsync("player2 puts \'O\' at (2,2)", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+#line hidden
+#line 38
+ await testRunner.ThenAsync("player2 should win", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
+#line hidden
+            }
+            await this.ScenarioCleanupAsync();
+        }
+        
+        [global::Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute("Player2 wins on a diagonal (right to left)")]
+        [global::Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Player2 wins on a diagonal (right to left)")]
+        [global::Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "TicTacToe")]
+        public async global::System.Threading.Tasks.Task Player2WinsOnADiagonalRightToLeft()
+        {
+            string[] tagsOfScenario = ((string[])(null));
+            global::System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new global::System.Collections.Specialized.OrderedDictionary();
+            string pickleIndex = "4";
+            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Player2 wins on a diagonal (right to left)", null, tagsOfScenario, argumentsOfScenario, featureTags, pickleIndex);
+            string[] tagsOfRule = ((string[])(null));
+            global::Reqnroll.RuleInfo ruleInfo = null;
+#line 40
+this.ScenarioInitialize(scenarioInfo, ruleInfo);
+#line hidden
+            if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
+            {
+                await testRunner.SkipScenarioAsync();
+            }
+            else
+            {
+                await this.ScenarioStartAsync();
+#line 5
+await this.FeatureBackgroundAsync();
+#line hidden
+#line 41
+ await testRunner.WhenAsync("player1 puts \'X\' at (1,2)", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
+#line hidden
+#line 42
+ await testRunner.AndAsync("player2 puts \'O\' at (0,2)", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+#line hidden
+#line 43
+ await testRunner.AndAsync("player1 puts \'X\' at (1,0)", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+#line hidden
+#line 44
+ await testRunner.AndAsync("player2 puts \'O\' at (1,1)", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+#line hidden
+#line 45
+ await testRunner.AndAsync("player1 puts \'X\' at (2,2)", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+#line hidden
+#line 46
+ await testRunner.AndAsync("player2 puts \'O\' at (2,0)", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+#line hidden
+#line 47
  await testRunner.ThenAsync("player2 should win", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
             }
@@ -314,11 +366,11 @@ await this.FeatureBackgroundAsync();
         {
             string[] tagsOfScenario = ((string[])(null));
             global::System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new global::System.Collections.Specialized.OrderedDictionary();
-            string pickleIndex = "4";
+            string pickleIndex = "5";
             global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Draw (grid filled)", null, tagsOfScenario, argumentsOfScenario, featureTags, pickleIndex);
             string[] tagsOfRule = ((string[])(null));
             global::Reqnroll.RuleInfo ruleInfo = null;
-#line 39
+#line 49
 this.ScenarioInitialize(scenarioInfo, ruleInfo);
 #line hidden
             if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
@@ -331,34 +383,34 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
 #line 5
 await this.FeatureBackgroundAsync();
 #line hidden
-#line 40
+#line 50
     await testRunner.WhenAsync("player1 puts \'X\' at (0,0)", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
-#line 41
+#line 51
     await testRunner.AndAsync("player2 puts \'O\' at (1,0)", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
-#line 42
+#line 52
     await testRunner.AndAsync("player1 puts \'X\' at (2,0)", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
-#line 43
+#line 53
     await testRunner.AndAsync("player2 puts \'O\' at (1,1)", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
-#line 44
+#line 54
     await testRunner.AndAsync("player1 puts \'X\' at (0,1)", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
-#line 45
+#line 55
     await testRunner.AndAsync("player2 puts \'O\' at (2,1)", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
-#line 46
+#line 56
     await testRunner.AndAsync("player1 puts \'X\' at (1,2)", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
-#line 47
+#line 57
     await testRunner.AndAsync("player2 puts \'O\' at (0,2)", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
-#line 48
+#line 58
     await testRunner.AndAsync("player1 puts \'X\' at (2,2)", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
-#line 49
+#line 59
     await testRunner.ThenAsync("game should be a draw", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
             }
@@ -372,11 +424,11 @@ await this.FeatureBackgroundAsync();
         {
             string[] tagsOfScenario = ((string[])(null));
             global::System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new global::System.Collections.Specialized.OrderedDictionary();
-            string pickleIndex = "5";
+            string pickleIndex = "6";
             global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Player1 wins at the last move", null, tagsOfScenario, argumentsOfScenario, featureTags, pickleIndex);
             string[] tagsOfRule = ((string[])(null));
             global::Reqnroll.RuleInfo ruleInfo = null;
-#line 52
+#line 62
 this.ScenarioInitialize(scenarioInfo, ruleInfo);
 #line hidden
             if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
@@ -389,34 +441,34 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
 #line 5
 await this.FeatureBackgroundAsync();
 #line hidden
-#line 53
+#line 63
  await testRunner.WhenAsync("player1 puts \'X\' at (0,0)", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
-#line 54
+#line 64
     await testRunner.AndAsync("player2 puts \'O\' at (2,0)", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
-#line 55
+#line 65
     await testRunner.AndAsync("player1 puts \'X\' at (1,1)", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
-#line 56
+#line 66
     await testRunner.AndAsync("player2 puts \'O\' at (0,1)", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
-#line 57
+#line 67
     await testRunner.AndAsync("player1 puts \'X\' at (1,0)", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
-#line 58
+#line 68
     await testRunner.AndAsync("player2 puts \'O\' at (1,2)", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
-#line 59
+#line 69
     await testRunner.AndAsync("player1 puts \'X\' at (2,1)", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
-#line 60
+#line 70
     await testRunner.AndAsync("player2 puts \'O\' at (0,2)", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
-#line 61
+#line 71
     await testRunner.AndAsync("player1 puts \'X\' at (2,2)", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
-#line 62
+#line 72
     await testRunner.ThenAsync("player1 should win", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
             }
@@ -430,11 +482,11 @@ await this.FeatureBackgroundAsync();
         {
             string[] tagsOfScenario = ((string[])(null));
             global::System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new global::System.Collections.Specialized.OrderedDictionary();
-            string pickleIndex = "6";
+            string pickleIndex = "7";
             global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Cannot play on occupied cell", null, tagsOfScenario, argumentsOfScenario, featureTags, pickleIndex);
             string[] tagsOfRule = ((string[])(null));
             global::Reqnroll.RuleInfo ruleInfo = null;
-#line 65
+#line 75
 this.ScenarioInitialize(scenarioInfo, ruleInfo);
 #line hidden
             if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
@@ -447,13 +499,13 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
 #line 5
 await this.FeatureBackgroundAsync();
 #line hidden
-#line 66
+#line 76
     await testRunner.WhenAsync("player1 puts \'X\' at (0,0)", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
-#line 67
+#line 77
     await testRunner.AndAsync("player2 puts \'O\' at (0,0)", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
-#line 68
+#line 78
     await testRunner.ThenAsync("an error should be thrown because the cell is already occupied", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
             }
@@ -467,11 +519,11 @@ await this.FeatureBackgroundAsync();
         {
             string[] tagsOfScenario = ((string[])(null));
             global::System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new global::System.Collections.Specialized.OrderedDictionary();
-            string pickleIndex = "7";
+            string pickleIndex = "8";
             global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Cannot play outside of the grid", null, tagsOfScenario, argumentsOfScenario, featureTags, pickleIndex);
             string[] tagsOfRule = ((string[])(null));
             global::Reqnroll.RuleInfo ruleInfo = null;
-#line 70
+#line 80
 this.ScenarioInitialize(scenarioInfo, ruleInfo);
 #line hidden
             if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
@@ -484,10 +536,10 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
 #line 5
 await this.FeatureBackgroundAsync();
 #line hidden
-#line 71
+#line 81
     await testRunner.WhenAsync("player1 puts \'X\' at (3,0)", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
-#line 72
+#line 82
     await testRunner.ThenAsync("an error should be thrown because the cell is out of grid", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
             }
@@ -501,11 +553,11 @@ await this.FeatureBackgroundAsync();
         {
             string[] tagsOfScenario = ((string[])(null));
             global::System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new global::System.Collections.Specialized.OrderedDictionary();
-            string pickleIndex = "8";
+            string pickleIndex = "9";
             global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Cannot play two times in a row", null, tagsOfScenario, argumentsOfScenario, featureTags, pickleIndex);
             string[] tagsOfRule = ((string[])(null));
             global::Reqnroll.RuleInfo ruleInfo = null;
-#line 74
+#line 84
 this.ScenarioInitialize(scenarioInfo, ruleInfo);
 #line hidden
             if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
@@ -518,13 +570,13 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
 #line 5
 await this.FeatureBackgroundAsync();
 #line hidden
-#line 75
+#line 85
  await testRunner.WhenAsync("player1 puts \'X\' at (1,1)", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
-#line 76
+#line 86
  await testRunner.AndAsync("player1 puts \'X\' at (1,2)", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
-#line 77
+#line 87
  await testRunner.ThenAsync("an error should be thrown because the wrong player tried to play", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
             }
@@ -538,11 +590,11 @@ await this.FeatureBackgroundAsync();
         {
             string[] tagsOfScenario = ((string[])(null));
             global::System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new global::System.Collections.Specialized.OrderedDictionary();
-            string pickleIndex = "9";
+            string pickleIndex = "10";
             global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Cannot play when game is over", null, tagsOfScenario, argumentsOfScenario, featureTags, pickleIndex);
             string[] tagsOfRule = ((string[])(null));
             global::Reqnroll.RuleInfo ruleInfo = null;
-#line 79
+#line 89
 this.ScenarioInitialize(scenarioInfo, ruleInfo);
 #line hidden
             if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
@@ -555,28 +607,28 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
 #line 5
 await this.FeatureBackgroundAsync();
 #line hidden
-#line 80
+#line 90
  await testRunner.WhenAsync("player1 puts \'X\' at (0,0)", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
-#line 81
+#line 91
  await testRunner.AndAsync("player2 puts \'O\' at (1,2)", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
-#line 82
+#line 92
  await testRunner.AndAsync("player1 puts \'X\' at (0,1)", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
-#line 83
+#line 93
  await testRunner.AndAsync("player2 puts \'O\' at (2,2)", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
-#line 84
+#line 94
  await testRunner.AndAsync("player1 puts \'X\' at (0,2)", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
-#line 85
+#line 95
  await testRunner.ThenAsync("player1 should win", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
-#line 86
+#line 96
  await testRunner.WhenAsync("player2 puts \'O\' at (1,0)", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
-#line 87
+#line 97
  await testRunner.ThenAsync("an error should be thrown because the game is over", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
             }
