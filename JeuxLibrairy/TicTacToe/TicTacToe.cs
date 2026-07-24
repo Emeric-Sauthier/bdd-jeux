@@ -1,10 +1,11 @@
 ﻿using JeuxLibrairy.Common.Enums;
 using JeuxLibrairy.Common.Exceptions;
+using JeuxLibrairy.Common.Interfaces;
 using JeuxLibrairy.TicTacToe.Exceptions;
 
 namespace JeuxLibrairy.TicTacToe
 {
-    public class TicTacToe
+    public class TicTacToe : IGame
     {
         private const int boardDimension = 3;
         private const char blankCellChar = '.';
@@ -54,14 +55,22 @@ namespace JeuxLibrairy.TicTacToe
 
         private void CheckBoard()
         {
-            if (CheckDiagonalWin())
+            if (IsDiagonalWin() || IsRowAndColumnWin())
             {
                 Winner = TurnTo;
                 State = GameState.Win;
                 return;
             }
 
-            int blankCharacters = 0;
+            if (IsDraw())
+            {
+                State = GameState.Draw;
+                return;
+            }
+        }
+
+        private bool IsRowAndColumnWin()
+        {
             for (int i = 0; i < boardDimension; i++)
             {
                 bool winOnRow = true;
@@ -69,34 +78,36 @@ namespace JeuxLibrairy.TicTacToe
 
                 for (int j = 0; j < boardDimension; j++)
                 {
-                    winOnRow = winOnRow & Board[i,j] == playerChar[TurnTo];
-                    winOnColumn = winOnColumn & Board[j,i] == playerChar[TurnTo];
-
-                    if (Board[i, j] == blankCellChar)
-                    {
-                        blankCharacters++;
-                    }
+                    winOnRow = winOnRow & Board[i, j] == playerChar[TurnTo];
+                    winOnColumn = winOnColumn & Board[j, i] == playerChar[TurnTo];
                 }
 
                 if (winOnRow || winOnColumn)
                 {
-                    Winner = TurnTo;
-                    State = GameState.Win;
-                    return;
+                    return true;
                 }
             }
 
-            if (blankCharacters == 0)
-            {
-                State = GameState.Draw;
-                return;
-            }
+            return false;
         }
 
-        private bool CheckDiagonalWin()
+        private bool IsDiagonalWin()
         {
             return (Board[0,0] == playerChar[TurnTo] && Board[1,1] == playerChar[TurnTo] && Board[2,2] == playerChar[TurnTo]) 
                 || (Board[0,2] == playerChar[TurnTo] && Board[1,1] == playerChar[TurnTo] && Board[2,0] == playerChar[TurnTo]);
+        }
+
+        private bool IsDraw()
+        {
+            foreach (char c in Board)
+            {
+                if (c == blankCellChar)
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
 
         private void SwapTurn()
