@@ -67,6 +67,7 @@ double-out, bust.
 
 **Stratégie de cas de tests.**
 - *Cas nominaux* : 
+    - Les deux joueurs commencent avec 301 points
     - Soustraction d'une volée
     - Alternance des deux joueurs
     - Checkout gagnant : dernière fléchette sur un double
