@@ -2,8 +2,8 @@
 {
     public enum Multiplier
     {
-        Simple,
-        Double,
-        Triple
+        Simple = 1,
+        Double = 2,
+        Triple = 3
     }
 }
