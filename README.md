@@ -38,11 +38,10 @@ alignement, la partie est nulle.
     - Match nul
 - *Cas limites* :
     - Victoire obtenue au 9e (dernier) coup
-    - Grille pleine.
 - *Cas d'erreurs* : 
     - Jouer sur une case déjà occupée
     - Jouer hors de la grille
-    - Jouer deux fois de suite (mauvais joueur)
+    - Jouer deux fois de suite
     - Jouer après la fin de partie
 
 ### 1.2 Fléchettes — 301 (double-out)
