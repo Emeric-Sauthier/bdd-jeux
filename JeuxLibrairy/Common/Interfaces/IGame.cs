@@ -1,6 +1,6 @@
-﻿using JeuxLibrairy.Common.Enums;
+﻿using JeuxLibrary.Common.Enums;
 
-namespace JeuxLibrairy.Common.Interfaces
+namespace JeuxLibrary.Common.Interfaces
 {
     public interface IGame
     {

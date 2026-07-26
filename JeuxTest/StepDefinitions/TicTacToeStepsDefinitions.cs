@@ -1,6 +1,7 @@
-﻿using JeuxLibrairy.Common.Enums;
-using JeuxLibrairy.TicTacToe;
-using JeuxLibrairy.TicTacToe.Exceptions;
+﻿using JeuxLibrary.Common.Enums;
+using JeuxLibrary.Common.Interfaces;
+using JeuxLibrary.TicTacToe;
+using JeuxLibrary.TicTacToe.Exceptions;
 using JeuxTest.Support;
 
 namespace JeuxTest.StepDefinitions

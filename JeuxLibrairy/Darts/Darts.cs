@@ -1,12 +1,12 @@
-﻿using JeuxLibrairy.Common.Enums;
-using JeuxLibrairy.Common.Exceptions;
-using JeuxLibrairy.Common.Interfaces;
+﻿using JeuxLibrary.Common.Enums;
+using JeuxLibrary.Common.Exceptions;
+using JeuxLibrary.Common.Interfaces;
 using JeuxLibrary.Darts.Enums;
 using JeuxLibrary.Darts.Exceptions;
 
 namespace JeuxLibrary.Darts
 {
-    public class Darts : IGame
+    public class Darts : IScoredGame
     {
         private const int startScore = 301;
         private int _dartThrown = 0;
@@ -51,7 +51,7 @@ namespace JeuxLibrary.Darts
             int dartPoint = value * (int)multiplier;
             int newScore = Scores[player] - dartPoint;
             _dartThrown++;
-            
+
             if (newScore < 0 || newScore == 1 || (newScore == 0 && multiplier != Multiplier.Double))
             {
                 Scores[player] = _initialScore;

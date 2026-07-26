@@ -1,4 +1,4 @@
-﻿namespace JeuxLibrairy.Common.Exceptions
+﻿namespace JeuxLibrary.Common.Exceptions
 {
     public class WrongPlayerException : Exception
     {

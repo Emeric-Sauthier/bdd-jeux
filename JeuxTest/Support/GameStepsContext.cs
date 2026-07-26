@@ -1,4 +1,4 @@
-﻿using JeuxLibrairy.Common.Interfaces;
+﻿using JeuxLibrary.Common.Interfaces;
 
 namespace JeuxTest.Support
 {

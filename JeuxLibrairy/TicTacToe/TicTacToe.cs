@@ -1,9 +1,9 @@
-﻿using JeuxLibrairy.Common.Enums;
-using JeuxLibrairy.Common.Exceptions;
-using JeuxLibrairy.Common.Interfaces;
-using JeuxLibrairy.TicTacToe.Exceptions;
+﻿using JeuxLibrary.Common.Enums;
+using JeuxLibrary.Common.Exceptions;
+using JeuxLibrary.Common.Interfaces;
+using JeuxLibrary.TicTacToe.Exceptions;
 
-namespace JeuxLibrairy.TicTacToe
+namespace JeuxLibrary.TicTacToe
 {
     public class TicTacToe : IGame
     {
@@ -93,8 +93,8 @@ namespace JeuxLibrairy.TicTacToe
 
         private bool IsDiagonalWin()
         {
-            return (Board[0, 0] == playerChar[TurnTo] && Board[1, 1] == playerChar[TurnTo] && Board[2, 2] == playerChar[TurnTo])
-                || (Board[0, 2] == playerChar[TurnTo] && Board[1, 1] == playerChar[TurnTo] && Board[2, 0] == playerChar[TurnTo]);
+            return Board[0, 0] == playerChar[TurnTo] && Board[1, 1] == playerChar[TurnTo] && Board[2, 2] == playerChar[TurnTo]
+                || Board[0, 2] == playerChar[TurnTo] && Board[1, 1] == playerChar[TurnTo] && Board[2, 0] == playerChar[TurnTo];
         }
 
         private bool IsDraw()
@@ -112,7 +112,7 @@ namespace JeuxLibrairy.TicTacToe
 
         private void SwapTurn()
         {
-            TurnTo = (TurnTo == Player.Player1) ? Player.Player2 : Player.Player1;
+            TurnTo = TurnTo == Player.Player1 ? Player.Player2 : Player.Player1;
         }
     }
 }

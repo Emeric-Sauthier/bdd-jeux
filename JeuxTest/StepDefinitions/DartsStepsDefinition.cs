@@ -1,4 +1,5 @@
-﻿using JeuxLibrairy.Common.Enums;
+﻿using JeuxLibrary.Common.Enums;
+using JeuxLibrary.Common.Interfaces;
 using JeuxLibrary.Darts;
 using JeuxLibrary.Darts.Enums;
 using JeuxLibrary.Darts.Exceptions;
@@ -22,18 +23,6 @@ namespace JeuxTest.StepDefinitions
         {
             _game = new Darts();
             _context.Game = _game;
-        }
-
-        [Given("player1 has a score of {int}")]
-        public void GivenPlayer1Score(int score)
-        {
-            _game.Scores[Player.Player1] = score;
-        }
-
-        [Given("player2 has a score of {int}")]
-        public void GivenPlayer2Score(int score)
-        {
-            _game.Scores[Player.Player2] = score;
         }
 
         [When("player1 throws a dart and makes a simple {int}")]
@@ -84,17 +73,17 @@ namespace JeuxTest.StepDefinitions
             Play(Player.Player2, 0, Multiplier.Simple);
         }
 
-        [Then("player1 should have a score of {int}")]
-        public void ThenPlayer1ShouldHaveScoreOf(int score)
-        {
-            Assert.AreEqual(score, _game.Scores[Player.Player1]);
-        }
+        //[Then("player1 should have a score of {int}")]
+        //public void ThenPlayer1ShouldHaveScoreOf(int score)
+        //{
+        //    Assert.AreEqual(score, _game.Scores[Player.Player1]);
+        //}
 
-        [Then("player2 should have a score of {int}")]
-        public void ThenPlayer2ShouldHaveScoreOf(int score)
-        {
-            Assert.AreEqual(score, _game.Scores[Player.Player2]);
-        }
+        //[Then("player2 should have a score of {int}")]
+        //public void ThenPlayer2ShouldHaveScoreOf(int score)
+        //{
+        //    Assert.AreEqual(score, _game.Scores[Player.Player2]);
+        //}
 
         [Then("an error should be thrown because the sector is invalid")]
         public void ThenErrorShouldBeThrown_WrongSector()

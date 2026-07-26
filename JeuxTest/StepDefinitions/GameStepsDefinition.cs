@@ -1,15 +1,16 @@
-﻿using JeuxLibrairy.Common.Enums;
-using JeuxLibrairy.Common.Exceptions;
+﻿using JeuxLibrary.Common.Enums;
+using JeuxLibrary.Common.Exceptions;
+using JeuxLibrary.Common.Interfaces;
 using JeuxTest.Support;
 
 namespace JeuxTest.StepDefinitions
 {
     [Binding]
-    public sealed class CommonStepsDefinition
+    public sealed class GameStepsDefinition
     {
         private readonly GameStepsContext _context;
 
-        public CommonStepsDefinition(GameStepsContext gameStepContext)
+        public GameStepsDefinition(GameStepsContext gameStepContext)
         {
             _context = gameStepContext;
         }

@@ -1,4 +1,4 @@
-﻿namespace JeuxLibrairy.Common.Enums
+﻿namespace JeuxLibrary.Common.Enums
 {
     public enum Player
     {

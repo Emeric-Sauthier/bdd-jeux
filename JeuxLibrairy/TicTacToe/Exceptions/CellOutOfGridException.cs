@@ -1,4 +1,4 @@
-﻿namespace JeuxLibrairy.TicTacToe.Exceptions
+﻿namespace JeuxLibrary.TicTacToe.Exceptions
 {
     public class CellOutOfGridException : Exception
     {
