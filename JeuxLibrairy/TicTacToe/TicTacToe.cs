@@ -49,7 +49,7 @@ namespace JeuxLibrary.TicTacToe
 
             Board[x, y] = playerChar[player];
 
-            if (IsDiagonalWin() || IsRowAndColumnWin())
+            if (IsDiagonalWin(playerChar[player]) || IsRowAndColumnWin(playerChar[player]))
             {
                 Winner = TurnTo;
                 State = GameState.Win;
@@ -65,7 +65,7 @@ namespace JeuxLibrary.TicTacToe
             SwapTurn();
         }
 
-        private bool IsRowAndColumnWin()
+        private bool IsRowAndColumnWin(char charToCheck)
         {
             for (int i = 0; i < boardDimension; i++)
             {
@@ -74,8 +74,8 @@ namespace JeuxLibrary.TicTacToe
 
                 for (int j = 0; j < boardDimension; j++)
                 {
-                    winOnRow = winOnRow & Board[i, j] == playerChar[TurnTo];
-                    winOnColumn = winOnColumn & Board[j, i] == playerChar[TurnTo];
+                    winOnRow = winOnRow & Board[i, j] == charToCheck;
+                    winOnColumn = winOnColumn & Board[j, i] == charToCheck;
                 }
 
                 if (winOnRow || winOnColumn)
@@ -87,10 +87,10 @@ namespace JeuxLibrary.TicTacToe
             return false;
         }
 
-        private bool IsDiagonalWin()
+        private bool IsDiagonalWin(char charToCheck)
         {
-            return Board[0, 0] == playerChar[TurnTo] && Board[1, 1] == playerChar[TurnTo] && Board[2, 2] == playerChar[TurnTo]
-                || Board[0, 2] == playerChar[TurnTo] && Board[1, 1] == playerChar[TurnTo] && Board[2, 0] == playerChar[TurnTo];
+            return Board[0, 0] == charToCheck && Board[1, 1] == charToCheck && Board[2, 2] == charToCheck
+                || Board[0, 2] == charToCheck && Board[1, 1] == charToCheck && Board[2, 0] == charToCheck;
         }
 
         private bool IsDraw()
