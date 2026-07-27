@@ -5,5 +5,6 @@
         InProgress,
         Win,
         Draw,
+        Lose,
     }
 }

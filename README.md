@@ -104,13 +104,12 @@ bien placé, mal placé.
     - Mélange de bien et mal placés
 - *Cas limites* : 
     - Doublons dans le code et/ou dans la proposition (exactitude du comptage)
-    - Victoire au 1er essai
     - Victoire au 10e (dernier) essai
     - Défaite après 10 essais
 - *Erreurs* :
     - Proposition de longueur incorrecte
     - Couleur hors palette
-    - Jeu après la fin de partie.
+    - Jeu après la fin de partie
 
 ---
 
