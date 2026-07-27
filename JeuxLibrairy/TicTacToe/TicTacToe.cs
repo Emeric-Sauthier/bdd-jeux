@@ -7,8 +7,8 @@ namespace JeuxLibrary.TicTacToe
 {
     public class TicTacToe : IGame
     {
-        private const int boardDimension = 3;
-        private const char blankCellChar = '.';
+        private const int BoardDimension = 3;
+        private const char BlankCellChar = '.';
 
         private readonly Dictionary<Player, char> playerChar = new Dictionary<Player, char>() { { Player.Player1, 'X' }, { Player.Player2, 'O' } };
 
@@ -20,9 +20,9 @@ namespace JeuxLibrary.TicTacToe
         public TicTacToe()
         {
             Board = new char[3, 3] {
-                { blankCellChar, blankCellChar, blankCellChar },
-                { blankCellChar, blankCellChar, blankCellChar },
-                { blankCellChar, blankCellChar, blankCellChar }
+                { BlankCellChar, BlankCellChar, BlankCellChar },
+                { BlankCellChar, BlankCellChar, BlankCellChar },
+                { BlankCellChar, BlankCellChar, BlankCellChar }
             };
             State = GameState.InProgress;
             TurnTo = Player.Player1;
@@ -38,11 +38,11 @@ namespace JeuxLibrary.TicTacToe
             {
                 throw new WrongPlayerException($"{player} cannot play, it is {TurnTo}'s turn.");
             }
-            else if (x < 0 || x >= boardDimension || y < 0 || y >= boardDimension)
+            else if (x < 0 || x >= BoardDimension || y < 0 || y >= BoardDimension)
             {
                 throw new CellOutOfGridException($"The cell ({x},{y}) is out of the grid.");
             }
-            else if (Board[x, y] != blankCellChar)
+            else if (Board[x, y] != BlankCellChar)
             {
                 throw new CellOccupiedException($"Unable to put '{playerChar[player]}' at ({x},{y}), already occupied.");
             }
@@ -67,12 +67,12 @@ namespace JeuxLibrary.TicTacToe
 
         private bool IsRowAndColumnWin(char charToCheck)
         {
-            for (int i = 0; i < boardDimension; i++)
+            for (int i = 0; i < BoardDimension; i++)
             {
                 bool winOnRow = true;
                 bool winOnColumn = true;
 
-                for (int j = 0; j < boardDimension; j++)
+                for (int j = 0; j < BoardDimension; j++)
                 {
                     winOnRow = winOnRow & Board[i, j] == charToCheck;
                     winOnColumn = winOnColumn & Board[j, i] == charToCheck;
@@ -97,7 +97,7 @@ namespace JeuxLibrary.TicTacToe
         {
             foreach (char c in Board)
             {
-                if (c == blankCellChar)
+                if (c == BlankCellChar)
                 {
                     return false;
                 }

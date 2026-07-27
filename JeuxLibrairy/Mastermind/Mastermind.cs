@@ -8,8 +8,8 @@ namespace JeuxLibrary.Mastermind
 {
     public class Mastermind : IGame
     {
-        private const int maxRound = 10;
-        private const int codeLength = 4;
+        private const int MaxRound = 10;
+        private const int CodeLength = 4;
         private Color[]? _secretCode;
 
         public GameState State { get; private set; }
@@ -48,7 +48,7 @@ namespace JeuxLibrary.Mastermind
 
             int[] secretCodeInt = _secretCode.Select(c => (int)c).ToArray();
             ProposalResult[] results = { ProposalResult.Wrong, ProposalResult.Wrong, ProposalResult.Wrong, ProposalResult.Wrong };
-            for (int i = 0; i < codeLength; i++)
+            for (int i = 0; i < CodeLength; i++)
             {
                 if (secretCodeInt[i] == (int)proposal.ElementAt(i))
                 {
@@ -57,7 +57,7 @@ namespace JeuxLibrary.Mastermind
                 }
             }
 
-            for (int i = 0; i < codeLength; i++)
+            for (int i = 0; i < CodeLength; i++)
             {
                 if (results[i] == ProposalResult.WellPlaced)
                 {
@@ -72,13 +72,13 @@ namespace JeuxLibrary.Mastermind
                 }
             }
 
-            bool isWin = results.Count(r => r == ProposalResult.WellPlaced) == codeLength;
+            bool isWin = results.Count(r => r == ProposalResult.WellPlaced) == CodeLength;
             if (isWin)
             {
                 State = GameState.Win;
                 Winner = Player.Player1;
             }
-            else if (Round == maxRound)
+            else if (Round == MaxRound)
             {
                 State = GameState.Lose;
             }
@@ -131,9 +131,9 @@ namespace JeuxLibrary.Mastermind
         private void ValidateCombinaison(IEnumerable<Color> colors)
         {
             int colorCount = colors.Count();
-            if (colorCount != codeLength)
+            if (colorCount != CodeLength)
             {
-                throw new InvalidCodeException($"Code length is not respected. Should be {codeLength}, given {colorCount}.");
+                throw new InvalidCodeException($"Code length is not respected. Should be {CodeLength}, given {colorCount}.");
             }
 
             foreach (Color color in colors)

@@ -8,7 +8,7 @@ namespace JeuxLibrary.Darts
 {
     public class Darts : IScoredGame
     {
-        private const int startScore = 301;
+        private const int StartScore = 301;
         private int _dartThrown = 0;
         private int _initialScore = 0;
 
@@ -19,7 +19,7 @@ namespace JeuxLibrary.Darts
 
         public Darts()
         {
-            Scores = new Dictionary<Player, int>() { { Player.Player1, startScore }, { Player.Player2, startScore } };
+            Scores = new Dictionary<Player, int>() { { Player.Player1, StartScore }, { Player.Player2, StartScore } };
             State = GameState.InProgress;
             TurnTo = Player.Player1;
         }
