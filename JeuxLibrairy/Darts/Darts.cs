@@ -2,7 +2,6 @@
 using JeuxLibrary.Common.Exceptions;
 using JeuxLibrary.Common.Interfaces;
 using JeuxLibrary.Darts.Enums;
-using JeuxLibrary.Darts.Exceptions;
 using JeuxLibrary.Darts.Model;
 
 namespace JeuxLibrary.Darts
