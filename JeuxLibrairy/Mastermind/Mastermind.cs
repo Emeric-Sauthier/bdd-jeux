@@ -44,7 +44,7 @@ namespace JeuxLibrary.Mastermind
             } 
             else if (_secretCode is null)
             {
-                throw new InvalidCodeException("Unable to play, any secret code is defined.");
+                throw new NoSecretCodeException("Unable to play, any secret code is defined.");
             }
 
             int proposalLength = proposal.Count();
