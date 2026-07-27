@@ -88,6 +88,7 @@ namespace JeuxTest.StepDefinitions
         {
             try
             {
+                _context.Exception = null;
                 _game.Play(player, value, multiplier);
             }
             catch (Exception e)

@@ -74,6 +74,7 @@ namespace JeuxTest.StepDefinitions
         {
             try
             {
+                _context.Exception = null;
                 _proposalResults = _game.Play(code);
             }
             catch (Exception e)
