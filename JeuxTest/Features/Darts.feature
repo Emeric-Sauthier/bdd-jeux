@@ -45,23 +45,16 @@ Scenario: Minimal checkout
 	Then player1 should have a score of 0
 	And player1 should win
 
-Scenario: Bust when score to 1
-	Given player1 has a score of 2
-	When player1 throws a dart and makes a simple 1
-	Then player1 should have a score of 2
+Scenario Outline: Bust scenarios
+	Given player1 has a score of <score>
+	When player1 throws a dart and makes a simple <sector>
+	Then player1 should have a score of <score>
 	And should be turn of player2
-
-Scenario: Bust when score under 0
-	Given player1 has a score of 2
-	When player1 throws a dart and makes a simple 10
-	Then player1 should have a score of 2
-	And should be turn of player2
-
-Scenario: Bust when not finishing with a double
-	Given player1 has a score of 2
-	When player1 throws a dart and makes a simple 2
-	Then player1 should have a score of 2
-	And should be turn of player2
+	Examples: 
+	| score | sector |
+	|     2 |      1 |
+	|     2 |     10 |
+	|     2 |      2 |
 
 # ------------- Cas d'erreurs ----------- #
 Scenario: Cannot throw at an invalid sector
