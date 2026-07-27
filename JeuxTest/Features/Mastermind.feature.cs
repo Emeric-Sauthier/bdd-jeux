@@ -445,9 +445,12 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
 await this.FeatureBackgroundAsync();
 #line hidden
 #line 67
- await testRunner.GivenAsync("the secret code is \"Purple White White White\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
+ await testRunner.GivenAsync("start mastermind game", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
 #line hidden
 #line 68
+ await testRunner.AndAsync("the secret code is \"Purple White White White\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+#line hidden
+#line 69
  await testRunner.ThenAsync("an error should be throw because one color is invalid", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
             }
@@ -465,7 +468,7 @@ await this.FeatureBackgroundAsync();
             global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Wrong color (proposition)", null, tagsOfScenario, argumentsOfScenario, featureTags, pickleIndex);
             string[] tagsOfRule = ((string[])(null));
             global::Reqnroll.RuleInfo ruleInfo = null;
-#line 70
+#line 71
 this.ScenarioInitialize(scenarioInfo, ruleInfo);
 #line hidden
             if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
@@ -478,10 +481,10 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
 #line 5
 await this.FeatureBackgroundAsync();
 #line hidden
-#line 71
+#line 72
  await testRunner.WhenAsync("the codebreaker proposes \"Purple White White White\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
-#line 72
+#line 73
  await testRunner.ThenAsync("an error should be throw because one color is invalid", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
             }
@@ -499,7 +502,7 @@ await this.FeatureBackgroundAsync();
             global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Cannot play after the game is over", null, tagsOfScenario, argumentsOfScenario, featureTags, pickleIndex);
             string[] tagsOfRule = ((string[])(null));
             global::Reqnroll.RuleInfo ruleInfo = null;
-#line 74
+#line 75
 this.ScenarioInitialize(scenarioInfo, ruleInfo);
 #line hidden
             if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
@@ -512,11 +515,8 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
 #line 5
 await this.FeatureBackgroundAsync();
 #line hidden
-#line 75
- await testRunner.WhenAsync("the codebreaker proposes \"Black White White White\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
-#line hidden
 #line 76
- await testRunner.AndAsync("the codebreaker proposes \"Black White White White\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+ await testRunner.WhenAsync("the codebreaker proposes \"Black White White White\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
 #line 77
  await testRunner.AndAsync("the codebreaker proposes \"Black White White White\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
@@ -546,6 +546,9 @@ await this.FeatureBackgroundAsync();
  await testRunner.AndAsync("the codebreaker proposes \"Black White White White\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
 #line 86
+ await testRunner.AndAsync("the codebreaker proposes \"Black White White White\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+#line hidden
+#line 87
  await testRunner.ThenAsync("an error should be thrown because the game is over", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
             }

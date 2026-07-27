@@ -30,6 +30,7 @@ namespace JeuxTest.StepDefinitions
         {
             try
             {
+                _context.Exception = null;
                 _game.SetCode(code);
             }
             catch (Exception e)

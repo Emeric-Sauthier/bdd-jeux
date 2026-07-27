@@ -2,7 +2,7 @@
 {
     public enum Player
     {
-        Player1,
-        Player2
+        Player1 = 1,
+        Player2 = 2,
     }
 }

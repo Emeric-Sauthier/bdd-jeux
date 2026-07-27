@@ -24,52 +24,16 @@ namespace JeuxTest.StepDefinitions
             _context.Game = _game;
         }
 
-        [When("player1 throws a dart and makes a simple {int}")]
-        public void WhenPlayer1MakesSimple(int value)
+        [When(@"^(player\d) throws a dart and makes a (simple|double|triple) (\d+)$")]
+        public void WhenPlayerThrowsDart(Player player, Multiplier multiplier, int sector)
         {
-            Play(Player.Player1, value, Multiplier.Simple);
+            Play(player, sector, multiplier);
         }
 
-        [When("player1 throws a dart and makes a double {int}")]
-        public void WhenPlayer1MakesDouble(int value)
+        [When(@"^(player\d) throws a dart outside of the target$")]
+        public void WhenPlayerMissesDart(Player player)
         {
-            Play(Player.Player1, value, Multiplier.Double);
-        }
-
-        [When("player1 throws a dart and makes a triple {int}")]
-        public void WhenPlayer1MakesTriple(int value)
-        {
-            Play(Player.Player1, value, Multiplier.Triple);
-        }
-
-        [When("player1 throws a dart outside of the target")]
-        public void WhenPlayer1ThrowsDartOutside()
-        {
-            Play(Player.Player1, 0, Multiplier.Simple);
-        }
-
-        [When("player2 throws a dart and makes a simple {int}")]
-        public void WhenPlayer2MakesSimple(int value)
-        {
-            Play(Player.Player2, value, Multiplier.Simple);
-        }
-
-        [When("player2 throws a dart and makes a double {int}")]
-        public void WhenPlayer2MakesDouble(int value)
-        {
-            Play(Player.Player2, value, Multiplier.Double);
-        }
-
-        [When("player2 throws a dart and makes a triple {int}")]
-        public void WhenPlayer2MakesTriple(int value)
-        {
-            Play(Player.Player2, value, Multiplier.Triple);
-        }
-
-        [When("player2 throws a dart outside of the target")]
-        public void WhenPlayer2ThrowsDartOutside()
-        {
-            Play(Player.Player2, 0, Multiplier.Simple);
+            Play(player, 0, Multiplier.Simple);
         }
 
         [Then("an error should be thrown because the sector is invalid")]

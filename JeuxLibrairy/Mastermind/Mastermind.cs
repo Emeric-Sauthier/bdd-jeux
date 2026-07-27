@@ -23,7 +23,7 @@ namespace JeuxLibrary.Mastermind
             TurnTo = Player.Player1;
             Round = 1;
         }
-        public Mastermind(IEnumerable<Color> secretCode) : base()
+        public Mastermind(IEnumerable<Color> secretCode) : this()
         {
             SetCode(secretCode);
         }
@@ -35,13 +35,13 @@ namespace JeuxLibrary.Mastermind
         }
         public ProposalResult[] Play(IEnumerable<Color> proposal)
         {
-            if (State != GameState.InProgress)
-            {
-                throw new GameOverException($"Unable to play, the game is over ({State}).");
-            } 
-            else if (_secretCode is null)
+            if (_secretCode is null)
             {
                 throw new NoSecretCodeException("Unable to play, any secret code is defined.");
+            }
+            else if (State != GameState.InProgress)
+            {
+                throw new GameOverException($"Unable to play, the game is over ({State}).");
             }
 
             int proposalLength = proposal.Count();
@@ -110,6 +110,14 @@ namespace JeuxLibrary.Mastermind
             if (colorCount != codeLength)
             {
                 throw new InvalidCodeException($"Code length is not respected. Should be {codeLength}, given {colorCount}.");
+            }
+
+            foreach (Color color in code)
+            {
+                if (!Enum.IsDefined(color))
+                {
+                    throw new WrongColorException($"Unknown color '{color}'.");
+                }
             }
 
             _secretCode = code.ToArray();

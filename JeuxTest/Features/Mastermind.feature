@@ -64,7 +64,8 @@ Scenario: Wrong code length (proposition)
 	Then an error should be throw because the code length is invalid
 
 Scenario: Wrong color (set code)
-	Given the secret code is "Purple White White White"
+	Given start mastermind game
+	And the secret code is "Purple White White White"
 	Then an error should be throw because one color is invalid
 
 Scenario: Wrong color (proposition)
