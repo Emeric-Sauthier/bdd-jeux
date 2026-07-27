@@ -3,6 +3,7 @@ using JeuxLibrary.Common.Exceptions;
 using JeuxLibrary.Common.Interfaces;
 using JeuxLibrary.Darts.Enums;
 using JeuxLibrary.Darts.Exceptions;
+using JeuxLibrary.Darts.Model;
 
 namespace JeuxLibrary.Darts
 {
@@ -34,25 +35,18 @@ namespace JeuxLibrary.Darts
             {
                 throw new WrongPlayerException($"{player} cannot play, it is {TurnTo}'s turn.");
             }
-            else if ((value < 0 || value > 20) && value != 25)
-            {
-                throw new WrongDartSectorException($"Invalid value '{value}'.");
-            }
-            else if (value == 25 && multiplier == Multiplier.Triple)
-            {
-                throw new WrongDartMultiplierException($"Invalid multiplier.");
-            }
+
+            Dart dart = new Dart(value, multiplier);
 
             if (_dartThrown == 0)
             {
                 _initialScore = Scores[player];
             }
 
-            int dartPoint = value * (int)multiplier;
-            int newScore = Scores[player] - dartPoint;
+            int newScore = Scores[player] - dart.Points;
             _dartThrown++;
 
-            if (newScore < 0 || newScore == 1 || (newScore == 0 && multiplier != Multiplier.Double))
+            if (newScore < 0 || newScore == 1 || (newScore == 0 && dart.Multiplier != Multiplier.Double))
             {
                 Scores[player] = _initialScore;
                 SwapTurn();
@@ -61,7 +55,7 @@ namespace JeuxLibrary.Darts
 
             Scores[player] = newScore;
 
-            if (newScore == 0 && multiplier == Multiplier.Double)
+            if (newScore == 0 && dart.Multiplier == Multiplier.Double)
             {
                 State = GameState.Win;
                 Winner = player;
