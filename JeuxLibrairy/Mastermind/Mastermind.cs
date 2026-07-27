@@ -1,6 +1,6 @@
 ﻿using JeuxLibrary.Common.Enums;
-using JeuxLibrary.Common.Interfaces;
 using JeuxLibrary.Common.Exceptions;
+using JeuxLibrary.Common.Interfaces;
 using JeuxLibrary.Mastermind.Enums;
 using JeuxLibrary.Mastermind.Exceptions;
 
@@ -35,7 +35,7 @@ namespace JeuxLibrary.Mastermind
             {
                 throw new GameOverException($"Unable to play, the game is over ({State}).");
             }
-            
+
             int proposalLength = proposal.Count();
             if (proposalLength != codeLength)
             {
@@ -43,7 +43,7 @@ namespace JeuxLibrary.Mastermind
             }
 
             int[] secretCodeInt = _secretCode.Select(c => (int)c).ToArray();
-            ProposalResult[] results = { ProposalResult.Wrong, ProposalResult.Wrong, ProposalResult.Wrong, ProposalResult.Wrong};
+            ProposalResult[] results = { ProposalResult.Wrong, ProposalResult.Wrong, ProposalResult.Wrong, ProposalResult.Wrong };
             for (int i = 0; i < codeLength; i++)
             {
                 if (secretCodeInt[i] == (int)proposal.ElementAt(i))
@@ -53,7 +53,7 @@ namespace JeuxLibrary.Mastermind
                 }
             }
 
-            for (int i = 0;i < codeLength; i++)
+            for (int i = 0; i < codeLength; i++)
             {
                 if (results[i] == ProposalResult.WellPlaced)
                 {
@@ -82,7 +82,7 @@ namespace JeuxLibrary.Mastermind
             {
                 Round++;
             }
-            
+
             return results;
         }
 
@@ -112,7 +112,8 @@ namespace JeuxLibrary.Mastermind
                 if (Color.TryParse(stringColor, out Color color))
                 {
                     colors.Add(color);
-                } else
+                }
+                else
                 {
                     throw new WrongColorException($"Unknown color '{stringColor}'.");
                 }

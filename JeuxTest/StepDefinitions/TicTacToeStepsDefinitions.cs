@@ -1,5 +1,4 @@
 ﻿using JeuxLibrary.Common.Enums;
-using JeuxLibrary.Common.Interfaces;
 using JeuxLibrary.TicTacToe;
 using JeuxLibrary.TicTacToe.Exceptions;
 using JeuxTest.Support;

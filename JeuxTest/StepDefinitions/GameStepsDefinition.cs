@@ -1,6 +1,5 @@
 ﻿using JeuxLibrary.Common.Enums;
 using JeuxLibrary.Common.Exceptions;
-using JeuxLibrary.Common.Interfaces;
 using JeuxTest.Support;
 
 namespace JeuxTest.StepDefinitions
