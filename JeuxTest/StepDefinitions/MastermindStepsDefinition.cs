@@ -71,6 +71,18 @@ namespace JeuxTest.StepDefinitions
             Assert.IsInstanceOfType<InvalidCodeException>(_context.Exception);
         }
 
+        [Then("an error should be throw because no secret code is defined")]
+        public void ThenErrorShouldBeThrown_NoSecretCode()
+        {
+            Assert.IsInstanceOfType<NoSecretCodeException>(_context.Exception);
+        }
+
+        [Then("an error should be throw because the secret code cannot be changed")]
+        public void ThenErrorShouldBeThrown_CodeAlreadySet()
+        {
+            Assert.IsInstanceOfType<InvalidOperationException>(_context.Exception);
+        }
+
         private void Play(string code)
         {
             try

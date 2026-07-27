@@ -50,6 +50,16 @@ Scenario: Lose after 10 rounds
 	Then the codebreaker should loose
 
 # ------------- Cas d'erreurs ----------- #
+Scenario: Cannot propose before the secret code is set
+	Given start mastermind game
+	When the codebreaker proposes "White Black Red Green"
+	Then an error should be throw because no secret code is defined
+
+Scenario: Cannot change the secret code once the game has started
+	When the codebreaker proposes "Black White White White"
+	Given the secret code is "Red Red Red Red"
+	Then an error should be throw because the secret code cannot be changed
+
 Scenario: Wrong code length (set code)
 	Given start mastermind game
 	And the secret code is "White"
