@@ -39,11 +39,18 @@ Scenario: Make a double on the last throw to win
 	And player1 should win
 
 # ------------- Cas limites ------------- #
-Scenario: Minimal checkout
-	Given player1 has a score of 2
-	When player1 throws a dart and makes a double 1
+Scenario Outline: Checkouts
+	Given player1 has a score of <score>
+	When player1 throws a dart and makes a <multiplier1> <first>
+	And player1 throws a dart and makes a <multiplier2> <second>
+	And player1 throws a dart and makes a double <third>
 	Then player1 should have a score of 0
 	And player1 should win
+	Examples:
+	| score | first | multiplier1 | second | multiplier2 | third |
+	|   100 |    20 | simple      |     20 | double      |    20 |
+	|   120 |    20 | simple      |     25 | double      |    25 |
+	|   122 |    20 | triple      |     20 | triple      |     1 |
 
 Scenario Outline: Bust scenarios
 	Given player1 has a score of <score>
