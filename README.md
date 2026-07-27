@@ -21,7 +21,7 @@ dans les scénarios) et **stratégie de cas de tests** (nominaux / limites / err
 
 ### 1.1 TicTacToe (Morpion)
 
-**Principe & règles.**  
+**Principe & règles**  
 Grille 3×3, deux joueurs (`X` et `O`), `X` commence. À son tour, un
 joueur place son symbole sur une case vide. La partie est gagnée dès que trois symboles
 identiques sont alignés (ligne, colonne ou diagonale). Si la grille est remplie sans
@@ -29,7 +29,7 @@ alignement, la partie est nulle.
 
 **Vocabulaire métier :** grille, case, symbole, joueur, tour, alignement, victoire, match nul.
 
-**Stratégie de cas de tests.**
+**Stratégie de cas de tests**
 - *Cas nominaux* : 
     - Coups alternés valides
     - Victoire par ligne
@@ -66,10 +66,10 @@ Règles spécifiques :
 - **Sortie sur un double uniquement** : une fléchette qui amène le score à 0 autrement que par
   un double (simple, triple, ou bull simple = 25) est un *bust*.
 
-**Vocabulaire métier.** volée, secteur, simple / double / triple, bull, double-bull, checkout,
+**Vocabulaire métier** : volée, secteur, simple / double / triple, bull, double-bull, checkout,
 double-out, bust, fléchette manquée (secteur 0).
 
-**Stratégie de cas de tests.**
+**Stratégie de cas de tests**
 - *Cas nominaux* : 
     - Les deux joueurs commencent avec 301 points
     - Soustraction d'une volée
@@ -108,10 +108,10 @@ doublons. Le codebreaker **gagne** dès 4 pions bien placés ; il **perd** si le
 épuisés sans trouver.
 
 
-**Vocabulaire métier.** code secret, poseur de code, codebreaker, proposition (combinaison), pion,
+**Vocabulaire métier** : code secret, poseur de code, codebreaker, proposition (combinaison), pion,
 couleur, essai (*manche*), indice, bien placé, mal placé, faux.
 
-**Stratégie de cas de tests.**
+**Stratégie de cas de tests**
 - *Cas nominaux* :
     - Proposition entièrement fausse
     - Mélange de pions bien et mal placés
@@ -155,12 +155,75 @@ chaque jeu), qui fixent l'API métier
 
 ### 2.2 Architecture & représentation des données
 
-**TODO:** Compléter cette partie
+**Découpage** La solution sépare la bibliothèque métier (`JeuxLibrairy/`, assembly `JeuxLibrary`)
+des tests (`JeuxTest/`). Dans la bibliothèque, un dossier `Common/` contient les propriétés partagées des jeux (états, joueurs, erreurs, logique de base) et un
+dossier par jeu (`TicTacToe/`, `Darts/`, `Mastermind/`) contient le spécifique, dans les dossiers `Enums/`, `Exceptions/`
+et `Model/`. Aucun jeu ne dépend d'un autre.
+
+**Abstractions**  
+`IGame` expose le strict état commun aux trois jeux — `State`, `Winner`,
+`TurnTo`. Cette interface correspond à un jeu classique tour par tour.  
+L'interface `IScoredGame` l'étend pour les jeux à score (`Scores`, `GetScore`, `SetScore`), les fléchettes notamment.  
+`Play` n'est volontairement **pas** dans `IGame` : chaque jeu a une signature d'action propre
+(`Play(player, x, y)`, `Play(player, secteur, multiplicateur)`, `Play(proposition)`), et l'imposer
+aurait conduit à un paramètre fourre-tout.
+
+**Représentation des données**
+
+| Donnée | Représentation | Justification |
+|--------|----------------|---------------|
+| Grille du morpion | `char[3,3]`, sentinelle `'.'` | indexation `[ligne, colonne]` directe, lecture immédiate en debug |
+| Symbole du joueur | `Dictionary<Player, char>` | la règle « X commence » reste dans l'énumération `Player`, pas dans le symbole |
+| Scores des fléchettes | `Dictionary<Player, int>` | un seul point d'accès quel que soit le joueur |
+| Multiplicateur | `enum Multiplier { Simple = 1, Double = 2, Triple = 3 }` | la valeur *est* le facteur : `Points => Sector * (int)Multiplier` |
+| Fléchette | objet `Dart` validant à la construction | un `Dart` existant est toujours un lancer légal |
+| Code / proposition Mastermind | `Color[]` et `ProposalResult[]` de longueur 4 | positions préservées, comparaison position par position |
+| État de partie | `enum GameState { Pending, InProgress, Win, Draw, Lose }` | couvre les trois jeux, dont la phase de pose du code du Mastermind |
+
+**Gestion des erreurs**  
+Les règles violées lèvent des **exceptions métier typées** plutôt que des codes de retour. Chaque cas d'erreur
+du §1 correspond ainsi à un type précis, directement assertable dans un step
+« *an error should be thrown because …* ». L'assertion est donc effectuée sur le type de l'erreur, plutôt que sur le message.
 
 ### 2.3 Stratégie BDD & bonnes pratiques
 
-**Langage ubiquitaire :** A compléter
+**Langage ubiquitaire**  
+Les règles sont énoncées en français dans ce document, tandis que le code
+et les scénarios Gherkin sont en anglais, pour éviter tout décalage entre un identifiant et le
+terme qu'il porte. La correspondance est explicite :
 
-**Réutilisabilité :** A compléter
+| Français (document) | Anglais (code et scénarios) |
+|---------------------|-----------------------------|
+| grille / case | `Board` / cell |
+| tour, à qui de jouer | `TurnTo` |
+| volée, fléchette | volley, `Dart` |
+| secteur, multiplicateur | `Sector`, `Multiplier` |
+| bust, checkout | *bust*, *checkout* (termes conservés) |
+| essai / manche | `Round` |
+| bien placé / mal placé / faux | `WellPlaced` / `Misplaced` / `Wrong` |
+| poseur de code / codebreaker | code setter / `codebreaker` |
 
-**Maintenance.** A compléter
+Les mêmes mots se retrouvent d'un bout à l'autre de la chaîne : `player1 throws a dart and makes a
+double 20` se lit comme la règle.
+
+**Réutilisabilité**  
+Les scénarios s'appuient sur trois mécanismes :
+- un **contexte partagé** `GameStepsContext` (jeu courant + dernière exception), injecté par
+  construction dans chaque classe de steps
+- des **steps partagés** écrits une seule fois pour les différentes abstractions : `GameStepsDefinition`
+  pour `IGame`, et
+  `ScoredGameStepsDefinition` pour `IScoredGame`. Les steps spécifiques à chaque jeu portent uniquement sur la logique spécifique à celui-ci.
+- des **transformations d'arguments** (`StepTransformations`) qui convertissent `player1`/`player2`
+  en `Player` et `simple|double|triple` en `Multiplier`, une fois pour toutes. Cela permet de limiter le nombre de steps en factorisant par joueur, et par multiplicateur (pour les fléchettes).
+
+À cela s'ajoutent les `Background` pour l'initialisation de partie et les `Scenario Outline` pour
+les familles de cas (checkouts, busts, propositions incorrectes), qui évitent la duplication de
+scénarios quasi identiques.
+
+**Maintenance**  
+Ajouter un jeu consiste à créer un dossier et à implémenter `IGame` (ou
+`IScoredGame`) : les assertions de fin de partie, la gestion d'exception et le contexte de test sont
+acquis.  
+La présence de scénarios de test permet de s'assurer que les fonctionnalités fonctionnent. Suite à une modification de code, si l'un des test échoue, la modification en est la cause.
+
+---
