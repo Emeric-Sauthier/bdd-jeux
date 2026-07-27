@@ -246,13 +246,13 @@ await this.FeatureBackgroundAsync();
  await testRunner.AndAsync("player2 puts \'O\' at (1,2)", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
 #line 26
- await testRunner.AndAsync("player1 puts \'X\' at (0,1)", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+ await testRunner.AndAsync("player1 puts \'X\' at (1,0)", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
 #line 27
  await testRunner.AndAsync("player2 puts \'O\' at (2,2)", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
 #line 28
- await testRunner.AndAsync("player1 puts \'X\' at (0,2)", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+ await testRunner.AndAsync("player1 puts \'X\' at (2,0)", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
 #line 29
  await testRunner.ThenAsync("player1 should win", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");

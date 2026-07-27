@@ -23,9 +23,9 @@ Scenario: Player1 wins on a row
 Scenario: Player1 wins on a column
 	When player1 puts 'X' at (0,0)
 	And player2 puts 'O' at (1,2)
-	And player1 puts 'X' at (0,1)
+	And player1 puts 'X' at (1,0)
 	And player2 puts 'O' at (2,2)
-	And player1 puts 'X' at (0,2)
+	And player1 puts 'X' at (2,0)
 	Then player1 should win
 
 Scenario: Player2 wins on a diagonal (left to right)
