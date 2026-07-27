@@ -112,7 +112,10 @@ namespace JeuxLibrary.TicTacToe
 
         private void SwapTurn()
         {
-            TurnTo = TurnTo == Player.Player1 ? Player.Player2 : Player.Player1;
+            if (State == GameState.InProgress)
+            {
+                TurnTo = TurnTo == Player.Player1 ? Player.Player2 : Player.Player1;
+            }
         }
     }
 }
