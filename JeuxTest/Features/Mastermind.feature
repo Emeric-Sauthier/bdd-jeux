@@ -51,7 +51,8 @@ Scenario: Lose after 10 rounds
 
 # ------------- Cas d'erreurs ----------- #
 Scenario: Wrong code length (set code)
-	Given the secret code is "White"
+	Given start mastermind game
+	And the secret code is "White"
 	Then an error should be throw because the code length is invalid
 	Given the secret code is "White White White White White"
 	Then an error should be throw because the code length is invalid

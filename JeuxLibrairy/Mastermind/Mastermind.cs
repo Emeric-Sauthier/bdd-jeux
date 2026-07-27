@@ -19,16 +19,13 @@ namespace JeuxLibrary.Mastermind
 
         public Mastermind()
         {
-            State = GameState.InProgress;
+            State = GameState.Pending;
             TurnTo = Player.Player1;
             Round = 1;
         }
-        public Mastermind(IEnumerable<Color> secretCode)
+        public Mastermind(IEnumerable<Color> secretCode) : base()
         {
             SetCode(secretCode);
-            State = GameState.InProgress;
-            TurnTo = Player.Player1;
-            Round = 1;
         }
 
         public ProposalResult[] Play(string code)
@@ -104,6 +101,11 @@ namespace JeuxLibrary.Mastermind
         }
         public void SetCode(IEnumerable<Color> code)
         {
+            if (State != GameState.Pending)
+            {
+                throw new InvalidOperationException("Cannot set code at this moment of the game.");
+            }
+
             int colorCount = code.Count();
             if (colorCount != codeLength)
             {
@@ -111,6 +113,7 @@ namespace JeuxLibrary.Mastermind
             }
 
             _secretCode = code.ToArray();
+            State = GameState.InProgress;
         }
 
         private IEnumerable<Color> ParseCombinaison(string combinaison)

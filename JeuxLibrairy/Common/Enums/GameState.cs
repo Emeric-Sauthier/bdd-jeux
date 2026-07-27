@@ -2,6 +2,7 @@
 {
     public enum GameState
     {
+        Pending,
         InProgress,
         Win,
         Draw,
