@@ -72,6 +72,16 @@ namespace JeuxLibrary.Darts
             }
         }
 
+        public void SetScore(Player player, int score)
+        {
+            Scores[player] = score;
+        }
+
+        public int GetScore(Player player)
+        {
+            return Scores[player];
+        }
+
         private void SwapTurn()
         {
             TurnTo = (TurnTo == Player.Player1) ? Player.Player2 : Player.Player1;

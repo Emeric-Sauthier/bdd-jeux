@@ -51,7 +51,7 @@ namespace JeuxLibrary.TicTacToe
 
             if (IsDiagonalWin(playerChar[player]) || IsRowAndColumnWin(playerChar[player]))
             {
-                Winner = TurnTo;
+                Winner = player;
                 State = GameState.Win;
                 return;
             }

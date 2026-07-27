@@ -14,28 +14,17 @@ namespace JeuxTest.StepDefinitions
             _context = context;
         }
 
-        [Given("player1 has a score of {int}")]
-        public void GivenPlayer1Score(int score)
+        [Given(@"^(player\d) has a score of (\d+)$")]
+        public void GivenPlayerScore(Player player, int score)
         {
-            ((IScoredGame)_context.Game!).Scores[Player.Player1] = score;
+            ((IScoredGame)_context.Game!).SetScore(player, score);
         }
 
-        [Given("player2 has a score of {int}")]
-        public void GivenPlayer2Score(int score)
+        [Then(@"^(player\d) should have a score of (\d+)$")]
+        public void ThenPlayerShouldHaveScoreOf(Player player, int score)
         {
-            ((IScoredGame)_context.Game!).Scores[Player.Player2] = score;
-        }
-
-        [Then("player1 should have a score of {int}")]
-        public void ThenPlayer1ShouldHaveScoreOf(int score)
-        {
-            Assert.AreEqual(score, ((IScoredGame)_context.Game!).Scores[Player.Player1]);
-        }
-
-        [Then("player2 should have a score of {int}")]
-        public void ThenPlayer2ShouldHaveScoreOf(int score)
-        {
-            Assert.AreEqual(score, ((IScoredGame)_context.Game!).Scores[Player.Player2]);
+            int playerScore = ((IScoredGame)_context.Game!).GetScore(player);
+            Assert.AreEqual(score, playerScore);
         }
     }
 }

@@ -46,6 +46,7 @@ Scenario Outline: Checkouts
 	And player1 throws a dart and makes a double <third>
 	Then player1 should have a score of 0
 	And player1 should win
+	And should be turn of player1
 	Examples:
 	| score | first | multiplier1 | second | multiplier2 | third |
 	|   100 |    20 | simple      |     20 | double      |    20 |
@@ -60,7 +61,7 @@ Scenario Outline: Bust scenarios
 	Examples: 
 	| score | sector | multiplier |
 	|     2 |      1 | simple     |
-	|     2 |     10 | simple     |
+	|     2 |     25 | simple     |
 	|     2 |      2 | simple     |
 	|     3 |      1 | triple     |
 
