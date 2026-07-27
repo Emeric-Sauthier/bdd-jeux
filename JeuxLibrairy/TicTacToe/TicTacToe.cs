@@ -49,12 +49,6 @@ namespace JeuxLibrary.TicTacToe
 
             Board[x, y] = playerChar[player];
 
-            CheckBoard();
-            SwapTurn();
-        }
-
-        private void CheckBoard()
-        {
             if (IsDiagonalWin() || IsRowAndColumnWin())
             {
                 Winner = TurnTo;
@@ -67,6 +61,8 @@ namespace JeuxLibrary.TicTacToe
                 State = GameState.Draw;
                 return;
             }
+
+            SwapTurn();
         }
 
         private bool IsRowAndColumnWin()
@@ -112,10 +108,7 @@ namespace JeuxLibrary.TicTacToe
 
         private void SwapTurn()
         {
-            if (State == GameState.InProgress)
-            {
-                TurnTo = TurnTo == Player.Player1 ? Player.Player2 : Player.Player1;
-            }
+            TurnTo = TurnTo == Player.Player1 ? Player.Player2 : Player.Player1;
         }
     }
 }
