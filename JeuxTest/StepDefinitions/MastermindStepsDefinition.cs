@@ -11,7 +11,7 @@ namespace JeuxTest.StepDefinitions
     {
         private Mastermind _game;
         private GameStepsContext _context;
-        private ProposalResult[] _proposalResults;
+        private ProposalResult[]? _proposalResults;
 
         public MastermindStepsDefinition(GameStepsContext gameStepsContext)
         {
@@ -47,7 +47,8 @@ namespace JeuxTest.StepDefinitions
         [Then("the result of the proposition should be {string}")]
         public void ThenPropositionResultShouldBe(string result)
         {
-            Assert.IsNotNull(null);
+            string? resultsToString = string.Join(' ', _proposalResults!.Select(x => x.ToString()));
+            Assert.AreEqual(result, resultsToString);
         }
 
         [Then("the codebreaker should loose")]

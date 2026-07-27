@@ -1,5 +1,6 @@
 ﻿using JeuxLibrary.Common.Enums;
 using JeuxLibrary.Common.Interfaces;
+using JeuxLibrary.Common.Exceptions;
 using JeuxLibrary.Mastermind.Enums;
 using JeuxLibrary.Mastermind.Exceptions;
 
@@ -30,13 +31,59 @@ namespace JeuxLibrary.Mastermind
         }
         public ProposalResult[] Play(IEnumerable<Color> proposal)
         {
+            if (State != GameState.InProgress)
+            {
+                throw new GameOverException($"Unable to play, the game is over ({State}).");
+            }
+            
             int proposalLength = proposal.Count();
             if (proposalLength != codeLength)
             {
                 throw new InvalidCodeException($"Code length is not respected.Should be {codeLength}, given {proposalLength}.");
             }
 
-            return new ProposalResult[codeLength];
+            int[] secretCodeInt = _secretCode.Select(c => (int)c).ToArray();
+            ProposalResult[] results = { ProposalResult.Wrong, ProposalResult.Wrong, ProposalResult.Wrong, ProposalResult.Wrong};
+            for (int i = 0; i < codeLength; i++)
+            {
+                if (secretCodeInt[i] == (int)proposal.ElementAt(i))
+                {
+                    results[i] = ProposalResult.WellPlaced;
+                    secretCodeInt[i] = int.MinValue;
+                }
+            }
+
+            for (int i = 0;i < codeLength; i++)
+            {
+                if (results[i] == ProposalResult.WellPlaced)
+                {
+                    continue;
+                }
+
+                int index = secretCodeInt.ToList().IndexOf((int)proposal.ElementAt(i));
+                if (index != -1)
+                {
+                    results[i] = ProposalResult.Misplaced;
+                    secretCodeInt[index] = int.MinValue;
+                }
+            }
+
+            bool isWin = results.Count(r => r == ProposalResult.WellPlaced) == codeLength;
+            if (isWin)
+            {
+                State = GameState.Win;
+                Winner = Player.Player1;
+            }
+            else if (Round == maxRound)
+            {
+                State = GameState.Lose;
+            }
+            else
+            {
+                Round++;
+            }
+            
+            return results;
         }
 
         public void SetCode(string code)

@@ -21,7 +21,6 @@ Scenario: Some wellplaced / wrong / misplaced
 	Given the secret code is "White Black Red Green"
 	When the codebreaker proposes "Red Black Blue Green"
 	Then the result of the proposition should be "Misplaced WellPlaced Wrong WellPlaced"
-	And player1 should win
 
 # ------------- Cas limites ------------- #
 Scenario: Duplicate colors
