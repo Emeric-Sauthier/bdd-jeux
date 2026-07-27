@@ -47,14 +47,15 @@ Scenario: Minimal checkout
 
 Scenario Outline: Bust scenarios
 	Given player1 has a score of <score>
-	When player1 throws a dart and makes a simple <sector>
+	When player1 throws a dart and makes a <multiplier> <sector>
 	Then player1 should have a score of <score>
 	And should be turn of player2
 	Examples: 
-	| score | sector |
-	|     2 |      1 |
-	|     2 |     10 |
-	|     2 |      2 |
+	| score | sector | multiplier |
+	|     2 |      1 | simple     |
+	|     2 |     10 | simple     |
+	|     2 |      2 | simple     |
+	|     3 |      1 | triple     |
 
 # ------------- Cas d'erreurs ----------- #
 Scenario: Cannot throw at an invalid sector

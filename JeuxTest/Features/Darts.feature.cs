@@ -126,7 +126,7 @@ namespace JeuxTest.Features
         
         private static global::Reqnroll.Formatters.RuntimeSupport.FeatureLevelCucumberMessages InitializeCucumberMessages()
         {
-            return new global::Reqnroll.Formatters.RuntimeSupport.FeatureLevelCucumberMessages("Features/Darts.feature.ndjson", 15);
+            return new global::Reqnroll.Formatters.RuntimeSupport.FeatureLevelCucumberMessages("Features/Darts.feature.ndjson", 16);
         }
         
         [global::Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute("Players have a score of 301 at game debut")]
@@ -378,15 +378,17 @@ await this.FeatureBackgroundAsync();
         [global::Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute("Bust scenarios")]
         [global::Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Bust scenarios")]
         [global::Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Darts")]
-        [global::Microsoft.VisualStudio.TestTools.UnitTesting.DataRowAttribute("2", "1", "6", null, DisplayName="Bust scenarios(2,1,6)")]
-        [global::Microsoft.VisualStudio.TestTools.UnitTesting.DataRowAttribute("2", "10", "7", null, DisplayName="Bust scenarios(2,10,7)")]
-        [global::Microsoft.VisualStudio.TestTools.UnitTesting.DataRowAttribute("2", "2", "8", null, DisplayName="Bust scenarios(2,2,8)")]
-        public async global::System.Threading.Tasks.Task BustScenarios(string score, string sector, string @__pickleIndex, string[] exampleTags)
+        [global::Microsoft.VisualStudio.TestTools.UnitTesting.DataRowAttribute("2", "1", "simple", "6", null, DisplayName="Bust scenarios(2,1,simple,6)")]
+        [global::Microsoft.VisualStudio.TestTools.UnitTesting.DataRowAttribute("2", "10", "simple", "7", null, DisplayName="Bust scenarios(2,10,simple,7)")]
+        [global::Microsoft.VisualStudio.TestTools.UnitTesting.DataRowAttribute("2", "2", "simple", "8", null, DisplayName="Bust scenarios(2,2,simple,8)")]
+        [global::Microsoft.VisualStudio.TestTools.UnitTesting.DataRowAttribute("3", "1", "triple", "9", null, DisplayName="Bust scenarios(3,1,triple,9)")]
+        public async global::System.Threading.Tasks.Task BustScenarios(string score, string sector, string multiplier, string @__pickleIndex, string[] exampleTags)
         {
             string[] tagsOfScenario = exampleTags;
             global::System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new global::System.Collections.Specialized.OrderedDictionary();
             argumentsOfScenario.Add("score", score);
             argumentsOfScenario.Add("sector", sector);
+            argumentsOfScenario.Add("multiplier", multiplier);
             string pickleIndex = @__pickleIndex;
             global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Bust scenarios", null, tagsOfScenario, argumentsOfScenario, featureTags, pickleIndex);
             string[] tagsOfRule = ((string[])(null));
@@ -408,7 +410,7 @@ await this.FeatureBackgroundAsync();
  await testRunner.GivenAsync(string.Format("player1 has a score of {0}", score), ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
 #line hidden
 #line 50
- await testRunner.WhenAsync(string.Format("player1 throws a dart and makes a simple {0}", sector), ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
+ await testRunner.WhenAsync(string.Format("player1 throws a dart and makes a {0} {1}", multiplier, sector), ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
 #line 51
  await testRunner.ThenAsync(string.Format("player1 should have a score of {0}", score), ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
@@ -427,11 +429,11 @@ await this.FeatureBackgroundAsync();
         {
             string[] tagsOfScenario = ((string[])(null));
             global::System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new global::System.Collections.Specialized.OrderedDictionary();
-            string pickleIndex = "9";
+            string pickleIndex = "10";
             global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Cannot throw at an invalid sector", null, tagsOfScenario, argumentsOfScenario, featureTags, pickleIndex);
             string[] tagsOfRule = ((string[])(null));
             global::Reqnroll.RuleInfo ruleInfo = null;
-#line 60
+#line 61
 this.ScenarioInitialize(scenarioInfo, ruleInfo);
 #line hidden
             if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
@@ -444,10 +446,10 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
 #line 5
 await this.FeatureBackgroundAsync();
 #line hidden
-#line 61
+#line 62
     await testRunner.WhenAsync("player1 throws a dart and makes a simple 21", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
-#line 62
+#line 63
     await testRunner.ThenAsync("an error should be thrown because the sector is invalid", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
             }
@@ -461,11 +463,11 @@ await this.FeatureBackgroundAsync();
         {
             string[] tagsOfScenario = ((string[])(null));
             global::System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new global::System.Collections.Specialized.OrderedDictionary();
-            string pickleIndex = "10";
+            string pickleIndex = "11";
             global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Cannot make a triple bull", null, tagsOfScenario, argumentsOfScenario, featureTags, pickleIndex);
             string[] tagsOfRule = ((string[])(null));
             global::Reqnroll.RuleInfo ruleInfo = null;
-#line 64
+#line 65
 this.ScenarioInitialize(scenarioInfo, ruleInfo);
 #line hidden
             if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
@@ -478,10 +480,10 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
 #line 5
 await this.FeatureBackgroundAsync();
 #line hidden
-#line 65
+#line 66
     await testRunner.WhenAsync("player1 throws a dart and makes a triple 25", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
-#line 66
+#line 67
     await testRunner.ThenAsync("an error should be thrown because the multiplier is invalid", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
             }
@@ -495,11 +497,11 @@ await this.FeatureBackgroundAsync();
         {
             string[] tagsOfScenario = ((string[])(null));
             global::System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new global::System.Collections.Specialized.OrderedDictionary();
-            string pickleIndex = "11";
+            string pickleIndex = "12";
             global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Cannot throw a fourth dart in the same volley", null, tagsOfScenario, argumentsOfScenario, featureTags, pickleIndex);
             string[] tagsOfRule = ((string[])(null));
             global::Reqnroll.RuleInfo ruleInfo = null;
-#line 68
+#line 69
 this.ScenarioInitialize(scenarioInfo, ruleInfo);
 #line hidden
             if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
@@ -512,11 +514,8 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
 #line 5
 await this.FeatureBackgroundAsync();
 #line hidden
-#line 69
-    await testRunner.WhenAsync("player1 throws a dart and makes a simple 20", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
-#line hidden
 #line 70
-    await testRunner.AndAsync("player1 throws a dart and makes a simple 20", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+    await testRunner.WhenAsync("player1 throws a dart and makes a simple 20", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
 #line 71
     await testRunner.AndAsync("player1 throws a dart and makes a simple 20", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
@@ -525,6 +524,9 @@ await this.FeatureBackgroundAsync();
     await testRunner.AndAsync("player1 throws a dart and makes a simple 20", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
 #line 73
+    await testRunner.AndAsync("player1 throws a dart and makes a simple 20", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+#line hidden
+#line 74
     await testRunner.ThenAsync("an error should be thrown because the wrong player tried to play", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
             }
@@ -538,11 +540,11 @@ await this.FeatureBackgroundAsync();
         {
             string[] tagsOfScenario = ((string[])(null));
             global::System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new global::System.Collections.Specialized.OrderedDictionary();
-            string pickleIndex = "12";
+            string pickleIndex = "13";
             global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Cannot play after the game is over", null, tagsOfScenario, argumentsOfScenario, featureTags, pickleIndex);
             string[] tagsOfRule = ((string[])(null));
             global::Reqnroll.RuleInfo ruleInfo = null;
-#line 75
+#line 76
 this.ScenarioInitialize(scenarioInfo, ruleInfo);
 #line hidden
             if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
@@ -555,19 +557,19 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
 #line 5
 await this.FeatureBackgroundAsync();
 #line hidden
-#line 76
+#line 77
     await testRunner.GivenAsync("player1 has a score of 40", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
 #line hidden
-#line 77
+#line 78
     await testRunner.WhenAsync("player1 throws a dart and makes a double 20", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
-#line 78
+#line 79
     await testRunner.ThenAsync("player1 should win", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
-#line 79
+#line 80
     await testRunner.WhenAsync("player2 throws a dart and makes a simple 20", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
-#line 80
+#line 81
     await testRunner.ThenAsync("an error should be thrown because the game is over", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
             }
