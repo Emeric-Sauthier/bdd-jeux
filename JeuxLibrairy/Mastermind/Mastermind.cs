@@ -10,7 +10,7 @@ namespace JeuxLibrary.Mastermind
     {
         private const int maxRound = 10;
         private const int codeLength = 4;
-        private Color[] _secretCode = new Color[codeLength];
+        private Color[]? _secretCode;
 
         public GameState State { get; private set; }
         public Player? Winner { get; private set; }
@@ -19,6 +19,13 @@ namespace JeuxLibrary.Mastermind
 
         public Mastermind()
         {
+            State = GameState.InProgress;
+            TurnTo = Player.Player1;
+            Round = 1;
+        }
+        public Mastermind(IEnumerable<Color> secretCode)
+        {
+            SetCode(secretCode);
             State = GameState.InProgress;
             TurnTo = Player.Player1;
             Round = 1;
@@ -34,6 +41,10 @@ namespace JeuxLibrary.Mastermind
             if (State != GameState.InProgress)
             {
                 throw new GameOverException($"Unable to play, the game is over ({State}).");
+            } 
+            else if (_secretCode is null)
+            {
+                throw new InvalidCodeException("Unable to play, any secret code is defined.");
             }
 
             int proposalLength = proposal.Count();
@@ -109,7 +120,7 @@ namespace JeuxLibrary.Mastermind
 
             foreach (string stringColor in stringColors)
             {
-                if (Color.TryParse(stringColor, out Color color))
+                if (Color.TryParse(stringColor, out Color color) && Enum.IsDefined(color))
                 {
                     colors.Add(color);
                 }
