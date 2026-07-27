@@ -44,11 +44,7 @@ namespace JeuxLibrary.Mastermind
                 throw new GameOverException($"Unable to play, the game is over ({State}).");
             }
 
-            int proposalLength = proposal.Count();
-            if (proposalLength != codeLength)
-            {
-                throw new InvalidCodeException($"Code length is not respected.Should be {codeLength}, given {proposalLength}.");
-            }
+            ValidateCombinaison(proposal);
 
             int[] secretCodeInt = _secretCode.Select(c => (int)c).ToArray();
             ProposalResult[] results = { ProposalResult.Wrong, ProposalResult.Wrong, ProposalResult.Wrong, ProposalResult.Wrong };
@@ -106,19 +102,7 @@ namespace JeuxLibrary.Mastermind
                 throw new InvalidOperationException("Cannot set code at this moment of the game.");
             }
 
-            int colorCount = code.Count();
-            if (colorCount != codeLength)
-            {
-                throw new InvalidCodeException($"Code length is not respected. Should be {codeLength}, given {colorCount}.");
-            }
-
-            foreach (Color color in code)
-            {
-                if (!Enum.IsDefined(color))
-                {
-                    throw new WrongColorException($"Unknown color '{color}'.");
-                }
-            }
+            ValidateCombinaison(code);
 
             _secretCode = code.ToArray();
             State = GameState.InProgress;
@@ -142,6 +126,23 @@ namespace JeuxLibrary.Mastermind
             }
 
             return colors;
+        }
+
+        private void ValidateCombinaison(IEnumerable<Color> colors)
+        {
+            int colorCount = colors.Count();
+            if (colorCount != codeLength)
+            {
+                throw new InvalidCodeException($"Code length is not respected. Should be {codeLength}, given {colorCount}.");
+            }
+
+            foreach (Color color in colors)
+            {
+                if (!Enum.IsDefined(color))
+                {
+                    throw new WrongColorException($"Unknown color '{color}'.");
+                }
+            }
         }
     }
 }
