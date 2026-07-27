@@ -34,7 +34,7 @@ alignement, la partie est nulle.
     - Coups alternés valides
     - Victoire par ligne
     - Victoire par colonne
-    - Victoire par diagonale
+    - Victoire par diagonale (les deux sens)
     - Match nul
 - *Cas limites* :
     - Victoire obtenue au 9e (dernier) coup
@@ -49,9 +49,13 @@ alignement, la partie est nulle.
 **Principe & règles :**  
 Deux joueurs partent chacun de **301** points. À chaque tour, un joueur
 lance une **volée de 3 fléchettes** ; chaque fléchette rapporte des points selon le secteur
-touché (1 à 20) et le multiplicateur (**simple**, **double**, **triple**), plus le **bull** (25)
-et le **double-bull** (50), ou 0 si la cible est manquée. Le total de la volée est **soustrait**
-du score.
+touché et le multiplicateur (**simple**, **double**, **triple**). Le total de la volée est
+**soustrait** du score, et la main passe au joueur suivant dès la 3e fléchette.
+
+Secteurs valides :
+- **1 à 20**, avec les trois multiplicateurs ;
+- **25** (*bull*) en simple (25 points) ou en double (*double-bull*, 50 points)
+- **0** : fléchette **manquée**, qui ne retire aucun point.
 
 Règles spécifiques :
 - **Double-out** : pour gagner, il faut atteindre **exactement 0** en terminant sur un **double**
@@ -63,50 +67,64 @@ Règles spécifiques :
   un double (simple, triple, ou bull simple = 25) est un *bust*.
 
 **Vocabulaire métier.** volée, secteur, simple / double / triple, bull, double-bull, checkout,
-double-out, bust.
+double-out, bust, fléchette manquée (secteur 0).
 
 **Stratégie de cas de tests.**
 - *Cas nominaux* : 
     - Les deux joueurs commencent avec 301 points
     - Soustraction d'une volée
     - Alternance des deux joueurs
+    - Fléchette manquée : aucun point retiré
+    - Le bull simple vaut 25 points
     - Checkout gagnant : dernière fléchette sur un double
 - *Cas limites* : 
     - Checkout minimal (reste 2 → D1)
-    - Score à 1 (*bust*)
-    - Dépassement sous 0 (*bust*)
-    - 0 atteint sur un simple ou triple (*bust*)
+    - Checkout terminé sur un double-bull
+    - Score ramené exactement à 1 (*bust*)
+    - 0 atteint sur un simple ou un triple (*bust*)
+    - Bust à la 2e ou 3e fléchette
 - *Cas d'erreurs* : 
-    - Secteur ou multiplicateur invalide
-    - 4e fléchette dans une volée
+    - Secteur invalide (au-delà de 20, hors bull)
+    - Multiplicateur invalide (triple bull)
+    - 4e fléchette dans une volée = lancer **hors tour**
     - Jeu après la victoire
 
 ### 1.3 Mastermind (6 couleurs / 4 positions)
 
 **Principe & règles :**  
-Un **code secret** de 4 pions est composé à partir de **6 couleurs**
-(les doublons sont autorisés). À chaque **essai**, le joueur propose une combinaison de 4 pions.
-Le jeu renvoie deux indices, **sans révéler les positions concernées** :
-- le nombre de pions **bien placés** (bonne couleur **et** bonne position) ;
-- le nombre de pions **mal placés** (bonne couleur, mauvaise position).
+La partie se déroule en deux temps. Le **poseur de code** définit d'abord un **code secret** de
+4 pions à partir de **6 couleurs** (les doublons sont autorisés). La partie ne démarre qu'à ce
+moment, et le code **ne peut plus être modifié** ensuite. Le **codebreaker** dispose alors de
+**10 manches** pour le retrouver.
+
+À chaque **essai**, le codebreaker propose une combinaison de 4 pions. Le jeu renvoie, **pour
+chaque position de la proposition**, l'un des trois indices suivants :
+- **bien placé** (bonne couleur **et** bonne position) ;
+- **mal placé** (bonne couleur, mauvaise position) ;
+- **faux** (couleur absente du code, ou déjà appariée).
 
 Le comptage apparie chaque pion **une seule fois**, ce qui rend le calcul subtil en présence de
-doublons. Le joueur **gagne** dès 4 pions bien placés ; il **perd** si les **10 essais** sont
+doublons. Le codebreaker **gagne** dès 4 pions bien placés ; il **perd** si les **10 essais** sont
 épuisés sans trouver.
 
-**Vocabulaire métier.** code secret, proposition (combinaison), pion, couleur, essai, indice,
-bien placé, mal placé.
+
+**Vocabulaire métier.** code secret, poseur de code, codebreaker, proposition (combinaison), pion,
+couleur, essai (*manche*), indice, bien placé, mal placé, faux.
 
 **Stratégie de cas de tests.**
 - *Cas nominaux* :
-    - Proposition entièrement fausse (0 bien / 0 mal)
-    - Code trouvé (4 bien placés → victoire)
-    - Mélange de bien et mal placés
+    - Proposition entièrement fausse
+    - Mélange de pions bien et mal placés
+    - Code trouvé (4 pions bien placés → victoire)
 - *Cas limites* : 
     - Doublons dans le code et/ou dans la proposition (exactitude du comptage)
     - Victoire au 10e (dernier) essai
     - Défaite après 10 essais
-- *Erreurs* :
+- *Cas d'erreurs* :
+    - Longueur de code incorrecte
+    - Couleur hors palette
+    - Modification du code secret après le démarrage de la partie
+    - Proposition avant qu'un code secret soit défini
     - Proposition de longueur incorrecte
     - Couleur hors palette
     - Jeu après la fin de partie
