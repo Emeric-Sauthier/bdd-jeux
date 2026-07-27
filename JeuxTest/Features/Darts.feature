@@ -63,11 +63,12 @@ Scenario Outline: Bust scenarios
 	Then player1 should have a score of <score>
 	And should be turn of player2
 	Examples: 
-	| score  | sector | multiplier |
-	|     2  |      1 | simple     |
-	|     25 |     25 | simple     |
-	|     2  |      2 | simple     |
-	|     3  |      1 | triple     |
+	| score  | sector  | multiplier |
+	|     2  |      1  | simple     |
+	|     25 |     25  | simple     |
+	|     2  |      2  | simple     |
+	|     3  |      1  | triple     |
+	|     3  |      10 | triple     |
 
 # ------------- Cas d'erreurs ----------- #
 Scenario: Cannot throw at an invalid sector
