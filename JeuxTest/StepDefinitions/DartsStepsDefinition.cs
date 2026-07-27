@@ -72,18 +72,6 @@ namespace JeuxTest.StepDefinitions
             Play(Player.Player2, 0, Multiplier.Simple);
         }
 
-        //[Then("player1 should have a score of {int}")]
-        //public void ThenPlayer1ShouldHaveScoreOf(int score)
-        //{
-        //    Assert.AreEqual(score, _game.Scores[Player.Player1]);
-        //}
-
-        //[Then("player2 should have a score of {int}")]
-        //public void ThenPlayer2ShouldHaveScoreOf(int score)
-        //{
-        //    Assert.AreEqual(score, _game.Scores[Player.Player2]);
-        //}
-
         [Then("an error should be thrown because the sector is invalid")]
         public void ThenErrorShouldBeThrown_WrongSector()
         {
