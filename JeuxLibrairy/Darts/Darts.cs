@@ -65,7 +65,6 @@ namespace JeuxLibrary.Darts
             {
                 State = GameState.Win;
                 Winner = player;
-                SwapTurn();
             }
 
             if (_dartThrown == 3)
