@@ -4,7 +4,7 @@
 
 ## Choix des jeux
 
-Trois jeux sont implémentés (minimum imposé par le sujet) :
+Trois jeux sont implémentés :
 
 | Jeu | Variante retenue |
 |-----|------------------|
@@ -12,15 +12,17 @@ Trois jeux sont implémentés (minimum imposé par le sujet) :
 | **Fléchettes** | **301**, sortie sur double (*double-out*), gestion du *bust* |
 | **Mastermind** | 6 couleurs, code de 4 pions, doublons autorisés, 10 essais |
 
+---
 
 ## 1. Les jeux : règles et vocabulaire métier
 
-Pour chaque jeu : **principe & règles** telles qu'implémentées, et **vocabulaire métier** réutilisé
-tel quel dans les scénarios. La stratégie de couverture est traitée au §2.1.
+Pour chaque jeu : **principe & règles**, et **vocabulaire métier**
+utilisé dans les scénarios.
 
 ### 1.1 TicTacToe (Morpion)
 
-**Principe & règles**  
+**Principe & règles**
+
 Grille 3×3, deux joueurs (`X` et `O`), `X` commence. À son tour, un
 joueur place son symbole sur une case vide. La partie est gagnée dès que trois symboles
 identiques sont alignés (ligne, colonne ou diagonale). Si la grille est remplie sans
@@ -31,18 +33,21 @@ un 9e coup gagnant donne une victoire, pas une partie nulle.
 
 ### 1.2 Fléchettes — 301 (double-out)
 
-**Principe & règles**  
+**Principe & règles**
+
 Deux joueurs partent chacun de **301** points. À chaque tour, un joueur
 lance une **volée de 3 fléchettes** ; chaque fléchette rapporte des points selon le secteur
 touché et le multiplicateur (**simple**, **double**, **triple**). Le total de la volée est
 **soustrait** du score, et la main passe au joueur suivant dès la 3e fléchette.
 
 Secteurs valides :
+
 - **1 à 20**, avec les trois multiplicateurs ;
 - **25** (*bull*) en simple (25 points) ou en double (*double-bull*, 50 points)
 - **0** : fléchette **manquée**, qui ne retire aucun point.
 
 Règles spécifiques :
+
 - **Double-out** : pour gagner, il faut atteindre **exactement 0** en terminant sur un **double**
   (ou un double-bull).
 - **Bust** : si un lancer fait passer le score en dessous de 0, exactement à 1, ou à 0 sans
@@ -51,12 +56,13 @@ Règles spécifiques :
 - **Sortie sur un double uniquement** : une fléchette qui amène le score à 0 autrement que par
   un double (simple, triple, ou bull simple = 25) est un *bust*.
 
-**Vocabulaire métier** : volée, secteur, simple / double / triple, bull, double-bull, checkout,
+**Vocabulaire métier :** volée, secteur, simple / double / triple, bull, double-bull, checkout,
 double-out, bust, fléchette manquée (secteur 0).
 
 ### 1.3 Mastermind (6 couleurs / 4 positions)
 
-**Principe & règles**  
+**Principe & règles**
+
 La partie se déroule en deux temps. Le **poseur de code** définit d'abord un **code secret** de
 4 pions à partir de **6 couleurs** (les doublons sont autorisés). La partie ne démarre qu'à ce
 moment, et le code **ne peut plus être modifié** ensuite. Le **codebreaker** dispose alors de
@@ -64,6 +70,7 @@ moment, et le code **ne peut plus être modifié** ensuite. Le **codebreaker** d
 
 À chaque **essai**, le codebreaker propose une combinaison de 4 pions. Le jeu renvoie, **pour
 chaque position de la proposition**, l'un des trois indices suivants :
+
 - **bien placé** (bonne couleur **et** bonne position) ;
 - **mal placé** (bonne couleur, mauvaise position) ;
 - **faux** (couleur absente du code, ou déjà appariée).
@@ -72,8 +79,7 @@ Le comptage apparie chaque pion **une seule fois**, ce qui rend le calcul subtil
 doublons. Le codebreaker **gagne** dès 4 pions bien placés ; il **perd** si les **10 essais** sont
 épuisés sans trouver.
 
-
-**Vocabulaire métier** : code secret, poseur de code, codebreaker, proposition (combinaison), pion,
+**Vocabulaire métier :** code secret, poseur de code, codebreaker, proposition (combinaison), pion,
 couleur, essai (*manche*), indice, bien placé, mal placé, faux.
 
 ---
@@ -82,27 +88,29 @@ couleur, essai (*manche*), indice, bien placé, mal placé, faux.
 
 ### 2.1 Identification des cas de test
 
-**Grille de lecture commune**  
+**Grille de lecture commune**
+
 Pour chaque jeu, la couverture est bâtie sur trois familles :
+
 - les **cas nominaux** : le déroulé attendu et la condition de victoire
 - les **cas limites** : les frontières exactes des règles (dernier coup, dernière manche, valeurs qui basculent d'un état à l'autre)
 - les **cas d'erreur** : les entrées invalides et les actions interdites.
 
 #### TicTacToe
 
-- *Cas nominaux* : 
-    - Coups alternés valides
-    - Victoire par ligne
-    - Victoire par colonne
-    - Victoire par diagonale (les deux sens)
-    - Match nul
+- *Cas nominaux* :
+  - Coups alternés valides
+  - Victoire par ligne
+  - Victoire par colonne
+  - Victoire par diagonale (les deux sens)
+  - Match nul
 - *Cas limites* :
-    - Victoire obtenue au 9e (dernier) coup
-- *Cas d'erreurs* : 
-    - Jouer sur une case déjà occupée
-    - Jouer hors de la grille
-    - Jouer deux fois de suite
-    - Jouer après la fin de partie
+  - Victoire obtenue au 9e (dernier) coup
+- *Cas d'erreurs* :
+  - Jouer sur une case déjà occupée
+  - Jouer hors de la grille
+  - Jouer deux fois de suite
+  - Jouer après la fin de partie
 
 
 | Famille | Scénarios |
@@ -113,24 +121,24 @@ Pour chaque jeu, la couverture est bâtie sur trois familles :
 
 #### Fléchettes
 
-- *Cas nominaux* : 
-    - Les deux joueurs commencent avec 301 points
-    - Soustraction d'une volée
-    - Alternance des deux joueurs
-    - Fléchette manquée : aucun point retiré
-    - Le bull simple vaut 25 points
-    - Checkout gagnant : dernière fléchette sur un double
-- *Cas limites* : 
-    - Checkout minimal (reste 2 → D1)
-    - Checkout terminé sur un double-bull
-    - Score ramené exactement à 1 (*bust*)
-    - 0 atteint sur un simple ou un triple (*bust*)
-    - Bust à la 2e ou 3e fléchette
-- *Cas d'erreurs* : 
-    - Secteur invalide (au-delà de 20, hors bull)
-    - Multiplicateur invalide (triple bull)
-    - 4e fléchette dans une volée = lancer **hors tour**
-    - Jeu après la victoire
+- *Cas nominaux* :
+  - Les deux joueurs commencent avec 301 points
+  - Soustraction d'une volée
+  - Alternance des deux joueurs
+  - Fléchette manquée : aucun point retiré
+  - Le bull simple vaut 25 points
+  - Checkout gagnant : dernière fléchette sur un double
+- *Cas limites* :
+  - Checkout minimal (reste 2 → D1)
+  - Checkout terminé sur un double-bull
+  - Score ramené exactement à 1 (*bust*)
+  - 0 atteint sur un simple ou un triple (*bust*)
+  - Bust à la 2e ou 3e fléchette
+- *Cas d'erreurs* :
+  - Secteur invalide (au-delà de 20, hors bull)
+  - Multiplicateur invalide (triple bull)
+  - 4e fléchette dans une volée = lancer **hors tour**
+  - Jeu après la victoire
 
 | Famille | Scénarios |
 |---------|-----------|
@@ -141,21 +149,21 @@ Pour chaque jeu, la couverture est bâtie sur trois familles :
 #### Mastermind
 
 - *Cas nominaux* :
-    - Proposition entièrement fausse
-    - Mélange de pions bien et mal placés
-    - Code trouvé (4 pions bien placés → victoire)
-- *Cas limites* : 
-    - Doublons dans le code et/ou dans la proposition (exactitude du comptage)
-    - Victoire au 10e (dernier) essai
-    - Défaite après 10 essais
+  - Proposition entièrement fausse
+  - Mélange de pions bien et mal placés
+  - Code trouvé (4 pions bien placés → victoire)
+- *Cas limites* :
+  - Doublons dans le code et/ou dans la proposition
+  - Victoire au 10e (dernier) essai
+  - Défaite après 10 essais
 - *Cas d'erreurs* :
-    - Longueur de code incorrecte
-    - Couleur hors palette
-    - Modification du code secret après le démarrage de la partie
-    - Proposition avant qu'un code secret soit défini
-    - Proposition de longueur incorrecte
-    - Couleur hors palette
-    - Jeu après la fin de partie
+  - Longueur de code incorrecte
+  - Couleur hors palette
+  - Modification du code secret après le démarrage de la partie
+  - Proposition avant qu'un code secret soit défini
+  - Proposition de longueur incorrecte
+  - Couleur hors palette
+  - Jeu après la fin de partie
 
 | Famille | Scénarios |
 |---------|-----------|
@@ -187,22 +195,26 @@ L'application de la méthode BDD, et la priorisation des scénarios de test ont 
 
 ### 3.1 Lisibilité des données de test
 
-**Background**  
-Chaque feature définit un **`Background`**, afin de mutualiser l'initialisation du jeu concerné, pour tous les scénarios de test renseignés. 
+**Background**
+
+Chaque feature définit un **`Background`**, afin de mutualiser l'initialisation du jeu concerné, pour tous les scénarios de test renseignés.
 
 Exemple pour le Mastermind :
+
 ```gherkin
 Background:
-	Given start mastermind game
-	And the secret code is "White Black White Green"
+  Given start mastermind game
+  And the secret code is "White Black White Green"
 ```
 
 Cette décision **améliore la lisibilité** des scénarios, qui exécutent uniquement les actions correspondantes, sans gérer l'initialisation. Les scénarios nécessitant une initialisation (ex : pose d'un code au Mastermind) le déclare explicitement.
 
-**Scenario Outline**  
+**Scenario Outline**
+
 Lors de la rédaction des scénarios, certains avaient la **même structure**, mais n'utilisaient pas les mêmes valeurs. Afin d'**améliorer la lisibilité** des scénarios, ils ont été factorisés grâce auX **`Scenario Outline`**. Les **données de test**, sont renseignées dans une table, sous la balise **`Examples`**, mettant ainsi en évidence les différences entre les cas de test.
 
 Exemple pour le bust aux fléchettes :
+
 ```gherkin
 Scenario Outline: Bust scenarios
 	Given player1 has a score of <score>
@@ -222,10 +234,12 @@ Dans cet exemple, les scénarios de *bust* sont centralisés, et l'on distingue 
 Le même
 raisonnement s'applique aux `Checkouts` (fléchettes) et aux `Incorrect answers` (Mastermind).
 
-**Raccourci pour les tests**  
+**Raccourci pour les tests**
+
 Le step `Given player1 has a score of 40` affecte directement un score de 40 au joueur 1, afin de se concentrer sur la règle testée, et limiter le nombre d'étape pour atteindre l'assertion de celle-ci.
 
 Exemple pour le test d'un checkout avec le step :
+
 ```gherkin
 Scenario: Make a double on the last throw to win
 	Given player1 has a score of 40
@@ -235,6 +249,7 @@ Scenario: Make a double on the last throw to win
 ```
 
 Exemple pour le test d'un checkout sans le step :
+
 ```gherkin
 Scenario: Make a double on the last throw to win
 	When player1 throws a dart and makes a triple 20
@@ -256,8 +271,10 @@ Scenario: Make a double on the last throw to win
 
 ### 3.2 Extensibilité
 
-**Ajout d'un jeu**  
+**Ajout d'un jeu**
+
 Pour ajouter un jeu, il suffit de :
+
 - Créer un dossier pour celui-ci
 - Créer la classe implémentant une interface de jeu (`IGame` ou `IScoredGame`)
 - Créer les éléments spécifiques (enums, exceptions, modèles)
@@ -268,7 +285,8 @@ Il peut être nécessaire de créer une nouvelle interface, afin de prendre en c
 
 Pour les jeux proposés dans le sujet (**tennis** et **bowling**), il faudrait certainement implémenter l'interface `IScoredGame`, afin que les jeux héritent de la gestion des scores.
 
-**Modifier une règle existante**  
+**Modifier une règle existante**
+
 Les paramètres de règle sont isolés en constantes dans les classes respectives des jeux.
 
 Exemples :
@@ -278,10 +296,11 @@ Exemples :
 | Autoriser 12 essais au Mastermind | `Mastermind.MaxRound` |
 | Code secret de 5 pions | `Mastermind.CodeLength` |
 
-**Limite d'extensibilité**  
+**Limite d'extensibilité**
+
 La taille de la grille de morpion n'est pas paramétrable, malgré la
 constante `BoardDimension`. En effet, le tableau est initialisé en `char[3,3]`, et la détection de diagonale
-énumère les indices `0`, `1`, `2` en dur.  
+énumère les indices `0`, `1`, `2` en dur.
 Modifier la taille de la grille impliquerait donc de modifier la logique de vérification.
 
 ---
@@ -325,20 +344,25 @@ Voici la correspondance entre les termes français, utilisés dans ce document, 
 
 ### 4.2 Réutilisabilité : steps communs vs. spécifiques
 
-**Steps communs**  
+**Steps communs**
+
 Les jeux implémentent les interfaces suivantes : `IGame` ou `IScoredGame`. Les jeux partagent donc des fonctionnalités grâce à ces interfaces.
 Les steps concernant les fonctionnalités de ces interfaces ont été centralisés dans les classes suivantes : `GameStepsDefinition` pour `IGame`, et `ScoredGameStepsDefinition` pour `IScoredGame`.
 Cela évite donc d'écrire, pour chaque jeu, les steps : `Then player1 should win`, `Then an error should be thrown because the game is over`, etc.
 Les classes de steps sont donc réduites à la logique stricte du jeu.
 
-**Contexte partagé**  
-Un objet `GameStepsContext`, contenant la partie courante et la dernière exception levée, est injecté par constructeur via l'injection de dépendances de Reqnroll.  
+**Contexte partagé**
+
+Un objet `GameStepsContext`, contenant la partie courante et la dernière exception levée, est injecté par constructeur via l'injection de dépendances de Reqnroll.
 Ainsi, tous les scénarios possèdent leur contexte, et les steps communs manipulent la partie à travers son interface (`IGame` ou `IScoredGame`).
 
-**Transformations d'arguments** `StepTransformations` convertit `player1`/ `player2` en `Player` et `simple|double|triple` en `Multiplier`.
+**Transformations d'arguments**
+
+`StepTransformations` convertit `player1` / `player2` en `Player` et `simple|double|triple` en `Multiplier`.
 Cela permet de réutiliser ces conversions dans les signatures de tous les steps, et de condenser plusieurs steps en un seul.
 
 Exemples pour les steps de lancer de fléchette avec transformation :
+
 ```csharp
 [When(@"^(player\d) throws a dart and makes a (simple|double|triple) (\d+)$")]
 public void WhenPlayerThrowsDart(Player player, Multiplier multiplier, int sector)
@@ -354,9 +378,10 @@ public void WhenPlayerMissesDart(Player player)
 ```
 
 Exemples pour les steps de lancer de fléchette sans transformation :
+
 ```csharp
 [When("player1 throws a dart and makes a simple {int}")]
-public void WhenPlayer1MakesSimple(int  value)
+public void WhenPlayer1MakesSimple(int value)
 {
   Play(Player.Player1, value, Multiplier.Simple);
 }
@@ -406,23 +431,25 @@ public void WhenPlayer2ThrowsDartOutside()
 
 ### 4.3 Maintenance
 
-**Arborescence**   
+**Arborescence**
+
 L'arborescence de la librairie offre une lisibilité simple :
-- Common => ce qui est utilisé par plusieurs jeux
-- Darts => ce qui est relatif aus fléchettes uniquement
-- Mastermind => ce qui est relatif au Mastermind uniquement 
-- TicTacToe => ce qui est relatif au morpion uniquement
+
+- `Common` => ce qui est utilisé par plusieurs jeux
+- `Darts` => ce qui est relatif aus fléchettes uniquement
+- `Mastermind` => ce qui est relatif au Mastermind uniquement
+- `TicTacToe` => ce qui est relatif au morpion uniquement
 
 Cette arborescence est, en partie, reprise dans le projet de test. En effet, chaque jeu possède son fichier `.feature` et sa classe de steps.
 
 Ce choix a été pris afin de faciliter la navigation dans les projets.
 
-**Projet de tests**  
+**Projet de tests**
+
 La présence d'un projet de tests, permet de garantir le fonctionnement des différents jeux. En effet, lors d'une modification de code, si l'un des scénarios est KO, alors il s'agit d'une erreur d'implémentation.
 
 Les scénarios testent les règles des jeux, peu importe leur implémentation.
 
-**Cas d'erreur**  
-Les cas d'erreur testent le type de l'exception et non le message. Ainsi, si un message d'erreur est changé, alors le test continue de passer.
+**Cas d'erreur**
 
----
+Les cas d'erreur testent le type de l'exception et non le message. Ainsi, si un message d'erreur est changé, alors le test continue de passer.
