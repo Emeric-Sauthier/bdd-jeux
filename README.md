@@ -16,18 +16,13 @@ Trois jeux sont implémentés :
 
 ## 1. Les jeux : règles et vocabulaire métier
 
-Pour chaque jeu : **principe & règles**, et **vocabulaire métier**
-utilisé dans les scénarios.
+Pour chaque jeu : **principe & règles**, et **vocabulaire métier** utilisé dans les scénarios.
 
 ### 1.1 TicTacToe (Morpion)
 
 **Principe & règles**
 
-Grille 3×3, deux joueurs (`X` et `O`), `X` commence. À son tour, un
-joueur place son symbole sur une case vide. La partie est gagnée dès que trois symboles
-identiques sont alignés (ligne, colonne ou diagonale). Si la grille est remplie sans
-alignement, la partie est nulle. La détection de victoire est évaluée **avant** celle du match nul :
-un 9e coup gagnant donne une victoire, pas une partie nulle.
+Grille 3×3, deux joueurs (`X` et `O`), `X` commence. À son tour, un joueur place son symbole sur une case vide. La partie est gagnée dès que trois symboles identiques sont alignés (ligne, colonne ou diagonale). Si la grille est remplie sans alignement, la partie est nulle. La détection de victoire est évaluée **avant** celle du match nul : un 9e coup gagnant donne une victoire, pas une partie nulle.
 
 **Vocabulaire métier :** grille, case, symbole, joueur, tour, alignement, victoire, match nul.
 
@@ -35,52 +30,37 @@ un 9e coup gagnant donne une victoire, pas une partie nulle.
 
 **Principe & règles**
 
-Deux joueurs partent chacun de **301** points. À chaque tour, un joueur
-lance une **volée de 3 fléchettes** ; chaque fléchette rapporte des points selon le secteur
-touché et le multiplicateur (**simple**, **double**, **triple**). Le total de la volée est
-**soustrait** du score, et la main passe au joueur suivant dès la 3e fléchette.
+Deux joueurs partent chacun de **301** points. À chaque tour, un joueur lance une **volée de 3 fléchettes**, chaque fléchette rapporte des points selon le secteur touché et le multiplicateur (**simple**, **double**, **triple**). Le total de la volée est **soustrait** du score, et la main passe au joueur suivant dès la 3e fléchette.
 
 Secteurs valides :
 
-- **1 à 20**, avec les trois multiplicateurs ;
+- **1 à 20**, avec les trois multiplicateurs
 - **25** (*bull*) en simple (25 points) ou en double (*double-bull*, 50 points)
 - **0** : fléchette **manquée**, qui ne retire aucun point.
 
 Règles spécifiques :
 
-- **Double-out** : pour gagner, il faut atteindre **exactement 0** en terminant sur un **double**
-  (ou un double-bull).
-- **Bust** : si un lancer fait passer le score en dessous de 0, exactement à 1, ou à 0 sans
-  double final, la volée est **annulée** : le score revient à sa valeur en début de tour et la
-  main passe au joueur suivant.
-- **Sortie sur un double uniquement** : une fléchette qui amène le score à 0 autrement que par
-  un double (simple, triple, ou bull simple = 25) est un *bust*.
+- **Double-out** : pour gagner, il faut atteindre **exactement 0** en terminant sur un **double** (ou un double-bull)
+- **Bust** : si un lancer fait passer le score en dessous de 0, exactement à 1, ou à 0 sans double final, la volée est **annulée** : le score revient à sa valeur en début de tour et la main passe au joueur suivant
+- **Sortie sur un double uniquement** : une fléchette qui amène le score à 0 autrement que par un double (simple, triple, ou bull simple = 25) est un *bust*.
 
-**Vocabulaire métier :** volée, secteur, simple / double / triple, bull, double-bull, checkout,
-double-out, bust, fléchette manquée (secteur 0).
+**Vocabulaire métier :** volée, secteur, simple / double / triple, bull, double-bull, checkout, double-out, bust, fléchette manquée (secteur 0).
 
 ### 1.3 Mastermind (6 couleurs / 4 positions)
 
 **Principe & règles**
 
-La partie se déroule en deux temps. Le **poseur de code** définit d'abord un **code secret** de
-4 pions à partir de **6 couleurs** (les doublons sont autorisés). La partie ne démarre qu'à ce
-moment, et le code **ne peut plus être modifié** ensuite. Le **codebreaker** dispose alors de
-**10 manches** pour le retrouver.
+La partie se déroule en deux temps. Le **poseur de code** définit d'abord un **code secret** de 4 pions à partir de **6 couleurs** (les doublons sont autorisés). La partie ne démarre qu'à ce moment, et le code **ne peut plus être modifié** ensuite. Le **codebreaker** dispose alors de **10 manches** pour le retrouver.
 
-À chaque **essai**, le codebreaker propose une combinaison de 4 pions. Le jeu renvoie, **pour
-chaque position de la proposition**, l'un des trois indices suivants :
+À chaque **essai**, le codebreaker propose une combinaison de 4 pions. Le jeu renvoie, **pour chaque position de la proposition**, l'un des trois indices suivants :
 
-- **bien placé** (bonne couleur **et** bonne position) ;
-- **mal placé** (bonne couleur, mauvaise position) ;
+- **bien placé** (bonne couleur **et** bonne position)
+- **mal placé** (bonne couleur, mauvaise position)
 - **faux** (couleur absente du code, ou déjà appariée).
 
-Le comptage apparie chaque pion **une seule fois**, ce qui rend le calcul subtil en présence de
-doublons. Le codebreaker **gagne** dès 4 pions bien placés ; il **perd** si les **10 essais** sont
-épuisés sans trouver.
+Le comptage apparie chaque pion **une seule fois**, ce qui rend le calcul subtil en présence de doublons. Le codebreaker **gagne** dès 4 pions bien placés. Il **perd** si les **10 essais** sont épuisés sans trouver.
 
-**Vocabulaire métier :** code secret, poseur de code, codebreaker, proposition (combinaison), pion,
-couleur, essai (*manche*), indice, bien placé, mal placé, faux.
+**Vocabulaire métier :** code secret, poseur de code, codebreaker, proposition (combinaison), pion, couleur, essai (*manche*), indice, bien placé, mal placé, faux.
 
 ---
 
@@ -180,10 +160,7 @@ Les **scénarios critiques** correspondent au fonctionnement de base des jeux :
 2. l'**action de base et l'alternance des tours**
 3. la **condition de victoire**
 
-Les **scénarios limites** correspondent aux règles spécifiques des jeux, sortant du déroulement idéal d'une partie. Il s'agit de règles, parfois subtiles, qui peuvent se montrer ambigues ou être propice à l'erreur.  
-Par exemple : le *double-out* et le *bust* aux fléchettes,
-la gestion des doublons au Mastermind, la priorité victoire/match nul au morpion.
-Ces scénarios ont été écrits avant le développement, afin de fixer l'attendu et limiter les erreurs d'interprétation et d'implémentation.
+Les **scénarios limites** correspondent aux règles spécifiques des jeux, sortant du déroulement idéal d'une partie. Il s'agit de règles, parfois subtiles, qui peuvent se montrer ambiguës ou être propices à l'erreur. Par exemple : le *double-out* et le *bust* aux fléchettes, la gestion des doublons au Mastermind, la priorité victoire/match nul au morpion. Ces scénarios ont été écrits avant le développement, afin de fixer l'attendu et limiter les erreurs d'interprétation et d'implémentation.
 
 Les **scénarios secondaires** correspondent aux cas d'erreur. Ils ont été écrits en dernier, car ils représentent des cas qui découlent des cas nominaux et limites. Ils garantissent que les règles et le cycle de vie des jeux soient respectés.
 
@@ -207,66 +184,64 @@ Background:
   And the secret code is "White Black White Green"
 ```
 
-Cette décision **améliore la lisibilité** des scénarios, qui exécutent uniquement les actions correspondantes, sans gérer l'initialisation. Les scénarios nécessitant une initialisation (ex : pose d'un code au Mastermind) le déclare explicitement.
+Cette décision **améliore la lisibilité** des scénarios, qui exécutent uniquement les actions correspondantes, sans gérer l'initialisation. Les scénarios nécessitant une initialisation (ex : pose d'un code au Mastermind) le déclarent explicitement.
 
 **Scenario Outline**
 
-Lors de la rédaction des scénarios, certains avaient la **même structure**, mais n'utilisaient pas les mêmes valeurs. Afin d'**améliorer la lisibilité** des scénarios, ils ont été factorisés grâce auX **`Scenario Outline`**. Les **données de test**, sont renseignées dans une table, sous la balise **`Examples`**, mettant ainsi en évidence les différences entre les cas de test.
+Lors de la rédaction des scénarios, certains avaient la **même structure**, mais n'utilisaient pas les mêmes valeurs. Afin d'**améliorer la lisibilité** des scénarios, ils ont été factorisés grâce aux **`Scenario Outline`**. Les **données de test** sont renseignées dans une table, sous la balise **`Examples`**, mettant ainsi en évidence les différences entre les cas de test.
 
 Exemple pour le bust aux fléchettes :
 
 ```gherkin
 Scenario Outline: Bust scenarios
-	Given player1 has a score of <score>
-	When player1 throws a dart and makes a <multiplier> <sector>
-	Then player1 should have a score of <score>
-	And should be turn of player2
-	Examples: 
-	| score  | sector  | multiplier |
-	|     2  |      1  | simple     |
-	|     25 |     25  | simple     |
-	|     2  |      2  | simple     |
-	|     3  |      1  | triple     |
-	|     3  |      10 | triple     |
+  Given player1 has a score of <score>
+  When player1 throws a dart and makes a <multiplier> <sector>
+  Then player1 should have a score of <score>
+  And should be turn of player2
+  Examples:
+  | score | sector | multiplier |
+  |     2 |      1 | simple     |
+  |    25 |     25 | simple     |
+  |     2 |      2 | simple     |
+  |     3 |      1 | triple     |
+  |     3 |     10 | triple     |
 ```
 
-Dans cet exemple, les scénarios de *bust* sont centralisés, et l'on distingue facilement quels cas sont renseignés. De plus, pour ajouter un cas de *bust*, il suffit de rajouter une ligne au tableau.  
-Le même
-raisonnement s'applique aux `Checkouts` (fléchettes) et aux `Incorrect answers` (Mastermind).
+Dans cet exemple, les scénarios de *bust* sont centralisés, et l'on distingue facilement quels cas sont renseignés. De plus, pour ajouter un cas de *bust*, il suffit de rajouter une ligne au tableau. Le même raisonnement s'applique aux `Checkouts` (fléchettes) et aux `Incorrect answers` (Mastermind).
 
 **Raccourci pour les tests**
 
-Le step `Given player1 has a score of 40` affecte directement un score de 40 au joueur 1, afin de se concentrer sur la règle testée, et limiter le nombre d'étape pour atteindre l'assertion de celle-ci.
+Le step `Given player1 has a score of 40` affecte directement un score de 40 au joueur 1, afin de se concentrer sur la règle testée, et limiter le nombre d'étapes pour atteindre l'assertion de celle-ci.
 
 Exemple pour le test d'un checkout avec le step :
 
 ```gherkin
 Scenario: Make a double on the last throw to win
-	Given player1 has a score of 40
-	When player1 throws a dart and makes a double 20
-	Then player1 should have a score of 0
-	And player1 should win
+  Given player1 has a score of 40
+  When player1 throws a dart and makes a double 20
+  Then player1 should have a score of 0
+  And player1 should win
 ```
 
 Exemple pour le test d'un checkout sans le step :
 
 ```gherkin
 Scenario: Make a double on the last throw to win
-	When player1 throws a dart and makes a triple 20
+  When player1 throws a dart and makes a triple 20
   And player1 throws a dart and makes a triple 20
   And player1 throws a dart and makes a triple 20
   And player2 throws a dart and makes a triple 20
   And player2 throws a dart and makes a triple 20
   And player2 throws a dart and makes a triple 20
-	And player1 throws a dart and makes a triple 20
+  And player1 throws a dart and makes a triple 20
   And player1 throws a dart and makes a simple 10
   And player1 throws a dart and makes a simple 11
   And player2 throws a dart and makes a triple 10
   And player2 throws a dart and makes a triple 10
   And player2 throws a dart and makes a triple 10
   And player1 throws a dart and makes a double 20
-	Then player1 should have a score of 0
-	And player1 should win
+  Then player1 should have a score of 0
+  And player1 should win
 ```
 
 ### 3.2 Extensibilité
@@ -281,7 +256,7 @@ Pour ajouter un jeu, il suffit de :
 - Créer la classe de steps
 - Créer le fichier `.feature`
 
-Il peut être nécessaire de créer une nouvelle interface, afin de prendre en compte un autre type de jeu. Dans ce cas ci, il faudrait créer une classe steps afin de tester ses fonctionnalités spécifiques.
+Il peut être nécessaire de créer une nouvelle interface, afin de prendre en compte un autre type de jeu. Dans ce cas, il faudrait créer une classe steps afin de tester ses fonctionnalités spécifiques.
 
 Pour les jeux proposés dans le sujet (**tennis** et **bowling**), il faudrait certainement implémenter l'interface `IScoredGame`, afin que les jeux héritent de la gestion des scores.
 
@@ -298,10 +273,7 @@ Exemples :
 
 **Limite d'extensibilité**
 
-La taille de la grille de morpion n'est pas paramétrable, malgré la
-constante `BoardDimension`. En effet, le tableau est initialisé en `char[3,3]`, et la détection de diagonale
-énumère les indices `0`, `1`, `2` en dur.
-Modifier la taille de la grille impliquerait donc de modifier la logique de vérification.
+La taille de la grille de morpion n'est pas paramétrable, malgré la constante `BoardDimension`. En effet, le tableau est initialisé en `char[3,3]`, et la détection de diagonale énumère les indices `0`, `1`, `2` en dur. Modifier la taille de la grille impliquerait donc de modifier la logique de vérification.
 
 ---
 
@@ -309,8 +281,7 @@ Modifier la taille de la grille impliquerait donc de modifier la logique de vér
 
 ### 4.1 Langage ubiquitaire
 
-Les scénarios sont écrits avec les mots des règles du §1, sans terme technique. La règle du
-*double-out* se relit directement dans le scénario qui la spécifie :
+Les scénarios sont écrits avec les mots des règles du §1, sans terme technique. La règle du *double-out* se relit directement dans le scénario qui la spécifie :
 
 ```gherkin
 Given player1 has a score of 40
@@ -319,9 +290,7 @@ Then player1 should have a score of 0
 And player1 should win
 ```
 
-Aucun mot de ce scénario n'appartient au vocabulaire du développeur : *score*, *throws a dart*,
-*double 20*, *win* sont ceux d'un joueur de fléchettes. Il en va de même au Mastermind, où les
-acteurs et les indices portent leur nom métier :
+Aucun mot de ce scénario n'appartient au vocabulaire du développeur : *score*, *throws a dart*, *double 20*, *win* sont ceux d'un joueur de fléchettes. Il en va de même au Mastermind, où les acteurs et les indices portent leur nom métier :
 
 ```gherkin
 Given the secret code is "White Black White Green"
@@ -346,20 +315,15 @@ Voici la correspondance entre les termes français, utilisés dans ce document, 
 
 **Steps communs**
 
-Les jeux implémentent les interfaces suivantes : `IGame` ou `IScoredGame`. Les jeux partagent donc des fonctionnalités grâce à ces interfaces.
-Les steps concernant les fonctionnalités de ces interfaces ont été centralisés dans les classes suivantes : `GameStepsDefinition` pour `IGame`, et `ScoredGameStepsDefinition` pour `IScoredGame`.
-Cela évite donc d'écrire, pour chaque jeu, les steps : `Then player1 should win`, `Then an error should be thrown because the game is over`, etc.
-Les classes de steps sont donc réduites à la logique stricte du jeu.
+Les jeux implémentent les interfaces suivantes : `IGame` ou `IScoredGame`. Les jeux partagent donc des fonctionnalités grâce à ces interfaces. Les steps concernant les fonctionnalités de ces interfaces ont été centralisés dans les classes suivantes : `GameStepsDefinition` pour `IGame`, et `ScoredGameStepsDefinition` pour `IScoredGame`. Cela évite donc d'écrire, pour chaque jeu, les steps : `Then player1 should win`, `Then an error should be thrown because the game is over`, etc. Les classes de steps sont donc réduites à la logique stricte du jeu.
 
 **Contexte partagé**
 
-Un objet `GameStepsContext`, contenant la partie courante et la dernière exception levée, est injecté par constructeur via l'injection de dépendances de Reqnroll.
-Ainsi, tous les scénarios possèdent leur contexte, et les steps communs manipulent la partie à travers son interface (`IGame` ou `IScoredGame`).
+Un objet `GameStepsContext`, contenant la partie courante et la dernière exception levée, est injecté par constructeur via l'injection de dépendances de Reqnroll. Ainsi, tous les scénarios possèdent leur contexte, et les steps communs manipulent la partie à travers son interface (`IGame` ou `IScoredGame`).
 
 **Transformations d'arguments**
 
-`StepTransformations` convertit `player1` / `player2` en `Player` et `simple|double|triple` en `Multiplier`.
-Cela permet de réutiliser ces conversions dans les signatures de tous les steps, et de condenser plusieurs steps en un seul.
+`StepTransformations` convertit `player1` / `player2` en `Player` et `simple|double|triple` en `Multiplier`. Cela permet de réutiliser ces conversions dans les signatures de tous les steps, et de condenser plusieurs steps en un seul.
 
 Exemples pour les steps de lancer de fléchette avec transformation :
 
@@ -436,7 +400,7 @@ public void WhenPlayer2ThrowsDartOutside()
 L'arborescence de la librairie offre une lisibilité simple :
 
 - `Common` => ce qui est utilisé par plusieurs jeux
-- `Darts` => ce qui est relatif aus fléchettes uniquement
+- `Darts` => ce qui est relatif aux fléchettes uniquement
 - `Mastermind` => ce qui est relatif au Mastermind uniquement
 - `TicTacToe` => ce qui est relatif au morpion uniquement
 
